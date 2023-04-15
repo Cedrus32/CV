@@ -8,8 +8,16 @@ class Button extends Component {
     }
 
     handleClick(e) {
-        console.log('button clicked')
-        console.log(e);
+        // console.log(e);
+        if (this.props.do === 'addSection') {
+            console.log('render new section form');
+        } else if (this.props.do === 'removeSection') {
+            console.log('remove this section form');
+        } else if (this.props.do === 'addListItem') {
+            console.log('add blank list item');
+        } else if (this.props.do === 'removeListItem') {
+            console.log('remove selected list item');
+        }
     }
 
     render() {
@@ -19,7 +27,8 @@ class Button extends Component {
     }
 }
 Button.propTypes = {
-    content: PropTypes.string.isRequired
+    content: PropTypes.string.isRequired,
+    do: PropTypes.string.isRequired
 }
 
 export default Button;

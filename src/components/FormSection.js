@@ -23,8 +23,8 @@ class FormSection extends Component {
         let addBtn;
         let removeBtn;
         if (this.props.type !== 'p') {
-            addBtn = <Button content='Add'/>
-            removeBtn = <Button content='Remove'/>
+            addBtn = <Button do='addSection' content='Add'/>
+            removeBtn = <Button do='removeSection' content='Remove'/>
         }
 
         return (
