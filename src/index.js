@@ -1,11 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import MyApp from './components/MyApp';
+import { createRoot } from 'react-dom/client';
+import App from './components/App';
 
 import './styles/style.css';
 import './styles/reset.css';
 import iconsArray from './scripts/icons.js';
 
 // manager function here
-console.log('webpack is working!');
-ReactDOM.render(<MyApp />, document.getElementById('root'));
+const domNode = document.getElementById('root');
+const root = createRoot(domNode);
+root.render(<App />);
