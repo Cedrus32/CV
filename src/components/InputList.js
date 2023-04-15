@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Button from './Button';
 
 class InputList extends Component {
     render() {
@@ -8,8 +9,8 @@ class InputList extends Component {
                 <label htmlFor={this.props.id}>{this.props.label}:</label>
                 <div>
                     <div className='btn-container'>
-                        <button>+</button>
-                        <button>-</button>
+                        <Button content='+'/>
+                        <Button content='-'/>
                     </div>
                     <div className='item-container'></div>
                 </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InputItem from './InputItem';
 import InputList from './InputList';
+import Button from './Button';
 
 class FormSection extends Component {
     constructor(props) {
@@ -22,8 +23,8 @@ class FormSection extends Component {
         let addBtn;
         let removeBtn;
         if (this.props.type !== 'p') {
-            addBtn = <button>Add</button>
-            removeBtn = <button>Remove</button>
+            addBtn = <Button content='Add'/>
+            removeBtn = <Button content='Remove'/>
         }
 
         return (
