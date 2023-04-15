@@ -4,7 +4,6 @@ import App from './components/App';
 
 import './styles/style.css';
 import './styles/reset.css';
-import iconsArray from './scripts/icons.js';
 
 // manager function here
 const domNode = document.getElementById('root');
