@@ -27,8 +27,7 @@ class FormSection extends Component {
 
     handleClick(e) {
         // console.log(e);
-        console.log('props', this.props);
-        console.log('state', this.state);
+        // console.log('props', this.props);
         
         let formsCopy = this.state.forms;
         formsCopy.push(<Form key={uniqid()} formType={this.props.formType} formLabels={this.props.formContent.labels}/>);
@@ -38,18 +37,23 @@ class FormSection extends Component {
     }
 
     componentDidUpdate() {
-        console.log('component did update');
+        console.log(this.props.formType, 'component did update');
+        console.log('state', this.state);
     }
 
     render() {
         return (
-            <>
+            <section id={this.props.formType}>
                 <h1 className='form-header'>{this.props.formContent.title}</h1>
-                {this.state.forms}
+                {this.state.forms.map(item => (
+                    <div key={uniqid()} className='form'>
+                        {item}
+                    </div>
+                ))}
                 {this.state.addBtn}
 
                 {/* {this.state.testCount} */}
-            </>
+            </section>
         );
     }
 }
