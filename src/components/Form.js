@@ -7,8 +7,9 @@ import Button from './Button';
 class Form extends Component {
         render() {
             // console.log(this.props);
+
             let inputItems = [];
-            this.props.formContent.labels.forEach((label, index) => {
+            this.props.formLabels.forEach((label, index) => {
                 let itemKey = this.props.formType + index;
                 if (label === 'Responsibilities' || label === 'Activities and Awards') {
                     inputItems.push(<InputList key={itemKey} id={itemKey} label={label}/>);
@@ -31,7 +32,7 @@ class Form extends Component {
         }
 }
 Form.propTypes = {
-    formContent: PropTypes.object.isRequired,
+    formLabels: PropTypes.array.isRequired,
     formType: PropTypes.string.isRequired,
 }
 
