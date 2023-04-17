@@ -9,8 +9,8 @@ class InputList extends Component {
                 <label htmlFor={this.props.id}>{this.props.label}:</label>
                 <div>
                     <div className='btn-container'>
-                        <Button do='addListItem' content='+'/>
-                        <Button do='removeListItem' content='-'/>
+                        <Button do='addListItem' buttonContent='+'/>
+                        <Button do='removeListItem' buttonContent='-'/>
                     </div>
                     <div className='item-container'></div>
                 </div>

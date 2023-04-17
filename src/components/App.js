@@ -24,9 +24,9 @@ class App extends Component {
         return (
             <>
                 <section id='interact'>
-                    <FormSection type='p' content={this.content.personal}/>
-                    <FormSection type='w' content={this.content.work}/>
-                    <FormSection type='e' content={this.content.education}/>
+                    <FormSection formType='p' formContent={this.content.personal}/>
+                    <FormSection formType='w' formContent={this.content.work}/>
+                    <FormSection formType='e' formContent={this.content.education}/>
                 </section>
                 <section id='display'></section>
             </>

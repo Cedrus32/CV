@@ -1,47 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import InputItem from './InputItem';
-import InputList from './InputList';
+import Form from './Form';
 import Button from './Button';
 
 class FormSection extends Component {
     constructor(props) {
         super(props);
-        this.inputItems = [];
+        this.state = {
+            forms: [],
+            addBtn: null,
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.formType === 'p') {
+            this.setState({forms: [<Form key={0} formType={this.props.formType} formContent={this.props.formContent}/>]});
+            console.log(this.state.elements);
+        } else {
+            this.setState({addBtn: <Button do='addSection' buttonContent='Add'/>})
+        }
     }
 
     render() {
-        this.props.content.labels.forEach((label, index) => {
-            let itemKey = this.props.type + index;
-            if (label === 'Responsibilities' || label === 'Activities and Awards') {
-                this.inputItems.push(<InputList key={itemKey} id={itemKey} label={label}/>);
-            } else {
-                this.inputItems.push(<InputItem key={itemKey} id={itemKey} label={label}/>)
-            }
-        });
-
-        let addBtn;
-        let removeBtn;
-        if (this.props.type !== 'p') {
-            addBtn = <Button do='addSection' content='Add'/>
-            removeBtn = <Button do='removeSection' content='Remove'/>
-        }
-
         return (
             <>
-                <form>
-                <h1 className='form-header'>{this.props.content.title}</h1>
-                    {this.inputItems}
-                    {removeBtn}
-                </form>
-                {addBtn}
+                <h1 className='form-header'>{this.props.formContent.title}</h1>
+                {this.state.forms}
+                {this.state.addBtn}
             </>
         );
     }
 }
 FormSection.propTypes = {
-    type: PropTypes.string.isRequired,
-    content: PropTypes.object.isRequired,
+    formType: PropTypes.string.isRequired,
+    formContent: PropTypes.object.isRequired,
 };
 
 export default FormSection;

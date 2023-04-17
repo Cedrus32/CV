@@ -22,12 +22,12 @@ class Button extends Component {
 
     render() {
         return (
-            <button type='button' onClick={this.handleClick}>{this.props.content}</button>
+            <button type='button' onClick={this.handleClick}>{this.props.buttonContent}</button>
         )
     }
 }
 Button.propTypes = {
-    content: PropTypes.string.isRequired,
+    buttonContent: PropTypes.string.isRequired,
     do: PropTypes.string.isRequired
 }
 

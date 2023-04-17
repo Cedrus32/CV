@@ -7,7 +7,6 @@ import Button from './Button';
 class Form extends Component {
         render() {
             // console.log(this.props);
-
             let inputItems = [];
             this.props.formContent.labels.forEach((label, index) => {
                 let itemKey = this.props.formType + index;
@@ -24,10 +23,10 @@ class Form extends Component {
             }
 
             return (
-                <form>
+                <>
                     {inputItems}
                     {removeBtn}
-                </form>
+                </>
             )
         }
 }
