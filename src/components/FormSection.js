@@ -10,15 +10,22 @@ class FormSection extends Component {
             forms: [],
             addBtn: null,
         }
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
         if (this.props.formType === 'p') {
             this.setState({forms: [<Form key={0} formType={this.props.formType} formContent={this.props.formContent}/>]});
-            console.log(this.state.elements);
         } else {
-            this.setState({addBtn: <Button do='addSection' buttonContent='Add'/>})
+            this.setState({addBtn: <Button do='addSection' handleClick={this.handleClick} buttonContent='Add'/>})
         }
+    }
+
+    handleClick(e) {
+        console.log(e);
+        console.log(this.props);
+        console.log(this.state);
     }
 
     render() {
