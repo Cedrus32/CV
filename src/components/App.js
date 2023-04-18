@@ -11,7 +11,7 @@ class App extends Component {
             },
             work: {
                 title: 'Work Experience',
-                labels: ['Company', 'Position', 'Location', 'Start', 'End', 'Responsibilities']
+                labels: ['Position', 'Company', 'Location', 'Start', 'End', 'Responsibilities']
             },
             education: {
                 title: 'Education',
