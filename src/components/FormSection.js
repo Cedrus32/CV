@@ -8,8 +8,8 @@ class FormSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            forms: [], // todo add unique id to items -> {form: <Form />, id: {uniqid()}}
-                       // todo pass the unique id to the remove button so that it can remove that form from this state with Array.find method
+            forms: [], //// add unique id to items -> {form: <Form />, id: {uniqid()}}
+                       //   todo pass the unique id to the remove button so that it can remove that form from this state with Array.find method
             addBtn: null,
         }
 
@@ -18,8 +18,7 @@ class FormSection extends Component {
 
     componentDidMount() {
         if (this.props.formType === 'p') {
-            let newID = uniqid();
-            this.setState({forms: [{id: newID, item: <Form key={newID} formType={this.props.formType} formLabels={this.props.formContent.labels}/>}]});
+            this.addForm();
         } else {
             this.setState({addBtn: <Button do='addSection' handleClick={this.handleClick} buttonContent='Add'/>})
         }
@@ -30,6 +29,10 @@ class FormSection extends Component {
         // console.log('state', this.state);
         console.log('props', this.props);
         
+        this.addForm();
+    }
+    
+    addForm() {
         let formsCopy = this.state.forms;
         let newID = uniqid();
         formsCopy.push({id: newID, item: <Form key={newID} formType={this.props.formType} formLabels={this.props.formContent.labels}/>});
