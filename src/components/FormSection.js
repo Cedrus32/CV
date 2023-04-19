@@ -8,10 +8,9 @@ class FormSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            forms: [],
+            forms: [], // todo add unique id to items -> {form: <Form />, id: {uniqid()}}
+                       // todo pass the unique id to the remove button so that it can remove that form from this state with Array.find method
             addBtn: null,
-            
-            // testCount: 0,
         }
 
         this.handleClick = this.handleClick.bind(this);
@@ -19,7 +18,8 @@ class FormSection extends Component {
 
     componentDidMount() {
         if (this.props.formType === 'p') {
-            this.setState({forms: [<Form key={uniqid()} formType={this.props.formType} formLabels={this.props.formContent.labels}/>]});
+            let newID = uniqid();
+            this.setState({forms: [{id: newID, item: <Form key={newID} formType={this.props.formType} formLabels={this.props.formContent.labels}/>}]});
         } else {
             this.setState({addBtn: <Button do='addSection' handleClick={this.handleClick} buttonContent='Add'/>})
         }
@@ -27,16 +27,16 @@ class FormSection extends Component {
 
     handleClick(e) {
         // console.log(e);
-        // console.log('props', this.props);
+        // console.log('state', this.state);
+        console.log('props', this.props);
         
         let formsCopy = this.state.forms;
-        formsCopy.push(<Form key={uniqid()} formType={this.props.formType} formLabels={this.props.formContent.labels}/>);
+        let newID = uniqid();
+        formsCopy.push({id: newID, item: <Form key={newID} formType={this.props.formType} formLabels={this.props.formContent.labels}/>});
         this.setState({forms: formsCopy});
-
-        // this.setState({testCount: this.state.testCount + 1});
     }
 
-    componentDidUpdate() {
+    componentDidUpdate() { // ! testing only
         console.log(this.props.formType, 'component did update');
         console.log('state', this.state);
     }
@@ -45,14 +45,12 @@ class FormSection extends Component {
         return (
             <section id={this.props.formType}>
                 <h1 className='form-header'>{this.props.formContent.title}</h1>
-                {this.state.forms.map(item => (
+                {this.state.forms.map(object => (
                     <div key={uniqid()} className='form'>
-                        {item}
+                        {object.item}
                     </div>
                 ))}
                 {this.state.addBtn}
-
-                {/* {this.state.testCount} */}
             </section>
         );
     }
