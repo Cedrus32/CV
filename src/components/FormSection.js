@@ -13,36 +13,27 @@ class FormSection extends Component {
             addBtn: null,
         }
 
-        this.handleClick = this.handleClick.bind(this);
+        this.addForm = this.addForm.bind(this);
+        this.removeForm = this.removeForm.bind(this);
     }
 
     componentDidMount() {
         if (this.props.formType === 'p') {
             this.addForm();
         } else {
-            this.setState({addBtn: <Button cssClass='add' do='addSection' handleClick={this.handleClick} buttonContent='Add'/>})
-        }
-    }
-
-    handleClick(e) {
-        console.log(e.target);
-        // console.log('state', this.state);
-        console.log('props', this.props);
-        
-        if (e.target.classList.contains('add')) {
-            this.addForm();
-        } else if (e.target.classList.contains('remove')) {
-            this.removeForm(e.target.id);
+            this.setState({addBtn: <Button handleClick={this.addForm} buttonContent='Add'/>})
         }
     }
     
     addForm() {
+        console.log('this', this);
         let formsCopy = this.state.forms;
         let newID = uniqid();
-        formsCopy.push({id: newID, item: <Form key={newID} cssClass={'remove'} formKey={newID} handleClick={this.handleClick} formType={this.props.formType} formLabels={this.props.formContent.labels}/>});
+        formsCopy.push({id: newID, item: <Form key={newID} formKey={newID} handleClick={this.removeForm} formType={this.props.formType} formLabels={this.props.formContent.labels}/>});
         this.setState({forms: formsCopy});
     }
     removeForm(itemID) {
+        console.log('this', this);
         let formsCopy = this.state.forms;
         let targetIndex = formsCopy.findIndex(object => object.id === itemID );
         formsCopy.splice(targetIndex, 1);
