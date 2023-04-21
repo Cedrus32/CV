@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Input extends Component {
-
     render() {
         // console.log(this.props);
+        
         return (
             <input type={this.props.inputType} id={this.props.id}></input>
         )
