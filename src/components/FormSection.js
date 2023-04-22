@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import uniqid from "uniqid";
+import uniqid from 'uniqid';
 import Form from './Form';
 import Button from './Button';
 
