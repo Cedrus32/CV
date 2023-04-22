@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Input from './Input';
 
 class InputItem extends Component {
     render() {
@@ -14,12 +15,15 @@ class InputItem extends Component {
             type = 'textbox';
         } else if (this.props.label === 'Start' || this.props.label === 'End' || this.props.label === 'Graduated') {
             type = 'date';
+        } else {
+            type='text';
         }
+        console.log(type);
 
         return (
             <div>
                 <label htmlFor={this.props.id}>{this.props.label}:</label>
-                <input type={type} id={this.props.id}></input>
+                <Input inputType={type} id={this.props.id}/>
             </div>
         );
     }
