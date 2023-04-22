@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import InputList from './InputList';
+import InputList from './InputList';
 import InputItem from './InputItem';
 import Button from './Button';
 
@@ -20,9 +20,9 @@ class Form extends Component {
 
         let inputItems = [];
         this.props.formLabels.forEach((label, index) => {
-            let itemKey = this.props.formType + index;
+            let itemKey = `${this.props.formKey}-${index}`;
             if (label === 'Responsibilities' || label === 'Activities and Awards') {
-                // inputItems.push(<InputList key={itemKey} id={itemKey} label={label}/>);
+                inputItems.push(<InputList key={itemKey} id={itemKey} label={label}/>);
             } else {
                 inputItems.push(<InputItem key={itemKey} id={itemKey} label={label}/>)
             }

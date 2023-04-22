@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 class Button extends Component {
     render() {
         return (
-            <button type='button' onClick={this.props.handleClick}>{this.props.buttonContent}</button>
+            <button type='button' id={this.props.idName} onClick={this.props.handleClick}>{this.props.buttonContent}</button>
         )
     }
 }
 Button.propTypes = {
+    idName: PropTypes.string,
     handleClick: PropTypes.func.isRequired,
     buttonContent: PropTypes.string.isRequired,
 }

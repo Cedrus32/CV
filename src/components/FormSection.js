@@ -32,10 +32,10 @@ class FormSection extends Component {
         formsCopy.push({id: newID, item: <Form key={newID} formKey={newID} handleClick={this.removeForm} formType={this.props.formType} formLabels={this.props.formContent.labels}/>});
         this.setState({forms: formsCopy});
     }
-    removeForm(itemID) {
+    removeForm(e) {
         console.log('this', this);
         let formsCopy = this.state.forms;
-        let targetIndex = formsCopy.findIndex(object => object.id === itemID );
+        let targetIndex = formsCopy.findIndex(object => object.id === e.target.id );
         formsCopy.splice(targetIndex, 1);
         this.setState({forms: formsCopy});
     }
@@ -60,7 +60,6 @@ class FormSection extends Component {
     }
 }
 FormSection.propTypes = {
-    cssClass: PropTypes.string,
     formType: PropTypes.string.isRequired,
     formContent: PropTypes.object.isRequired,
 };
