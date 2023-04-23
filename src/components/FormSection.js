@@ -8,8 +8,7 @@ class FormSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            forms: [], //// add unique id to items -> {form: <Form />, id: {uniqid()}}
-                       //   todo pass the unique id to the remove button so that it can remove that form from this state with Array.find method
+            forms: [],
             addBtn: null,
         }
 
@@ -26,14 +25,13 @@ class FormSection extends Component {
     }
     
     addForm() {
-        console.log('this', this);
-        let formsCopy = this.state.forms;
         let newID = uniqid();
-        formsCopy.push({id: newID, item: <Form key={newID} formKey={newID} handleClick={this.removeForm} formType={this.props.formType} formLabels={this.props.formContent.labels}/>});
-        this.setState({forms: formsCopy});
+        let newForm = {id: newID,
+                       object: <Form formKey={newID} formType={this.props.formType} formLabels={this.props.formContent.labels} handleClick={this.removeForm}/>
+                      };
+        this.setState({forms: [...this.state.forms, newForm]});
     }
     removeForm(e) {
-        console.log('this', this);
         let formsCopy = this.state.forms;
         let targetIndex = formsCopy.findIndex(object => object.id === e.target.id );
         formsCopy.splice(targetIndex, 1);
@@ -41,17 +39,22 @@ class FormSection extends Component {
     }
 
     componentDidUpdate() { // ! testing only
+        console.log('******');
         console.log(this.props.formType, 'component did update');
         console.log('state', this.state);
+        // this.state.forms.forEach(form => (
+        //     console.log(form.id, form.items)
+        // ));
+        console.log('******');
     }
 
     render() {
         return (
             <section id={this.props.formType}>
                 <h1 className='form-header'>{this.props.formContent.title}</h1>
-                {this.state.forms.map(object => (
-                    <div key={uniqid()} className='form'>
-                        {object.item}
+                {this.state.forms.map(form => (
+                    <div key={form.id}>
+                        {form.object}
                     </div>
                 ))}
                 {this.state.addBtn}
