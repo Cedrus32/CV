@@ -18,7 +18,6 @@ class InputItem extends Component {
         } else {
             type='text';
         }
-        console.log(type);
 
         return (
             <div>
