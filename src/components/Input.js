@@ -6,11 +6,13 @@ class Input extends Component {
         // console.log(this.props);
         
         return (
-            <input type={this.props.inputType} id={this.props.id}></input>
+            <input type={this.props.inputType} id={this.props.id} onFocus={this.props.handleFocus} onChange={this.props.handleChange}></input>
         )
     }
 }
 Input.propTypes = {
+    handleFocus: PropTypes.func,
+    handleChange: PropTypes.func,
     inputType: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
 }

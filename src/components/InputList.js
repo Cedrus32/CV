@@ -9,10 +9,13 @@ class InputList extends Component {
         super(props);
         this.state = {
             list: [],
+            currentTarget: null,
         }
 
         this.addItem = this.addItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     addItem() {
@@ -20,11 +23,25 @@ class InputList extends Component {
         let newID = uniqid();
         listCopy.push({id: newID, value: ''});
         this.setState({items: listCopy});
-        console.log(this.state.list);
     }
 
     removeItem() {
-        console.log('remove item by unique id');
+        let listCopy = this.state.list;
+        listCopy.splice(this.state.currentTarget, 1);
+        this.setState({list: listCopy});
+        this.setState({currentTarget: null});
+    }
+
+    handleFocus(e) {
+        let listCopy = this.state.list;
+        let targetIndex = listCopy.findIndex(object => object.id === e.target.id);
+        this.setState({currentTarget: targetIndex});
+    }
+
+    handleChange(e) {
+        let listCopy = this.state.list;
+        listCopy[this.state.currentTarget].value = e.target.value;
+        this.setState({list: listCopy});
     }
     
     render() {
@@ -36,7 +53,7 @@ class InputList extends Component {
                 <Button handleClick={this.removeItem} buttonContent='-'/>
                 <div className='item-container'>
                     {this.state.list.map(object => (
-                        <Input key={object.id} inputType='text' id={object.id} value={object.value}/>
+                        <Input key={object.id} handleFocus={this.handleFocus} handleChange={this.handleChange} inputType='text' id={object.id} value={object.value}/>
                     ))}
                 </div>
             </div>
