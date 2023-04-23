@@ -22,7 +22,7 @@ class InputList extends Component {
         let listCopy = this.state.list;
         let newID = uniqid();
         listCopy.push({id: newID, value: ''});
-        this.setState({items: listCopy});
+        this.setState({list: listCopy});
     }
 
     removeItem() {
