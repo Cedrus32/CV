@@ -43,9 +43,9 @@ class Form extends Component {
 }
 Form.propTypes = {
     formKey: PropTypes.string.isRequired,
-    handleClick: PropTypes.func,
-    formLabels: PropTypes.array.isRequired,
     formType: PropTypes.string.isRequired,
+    formLabels: PropTypes.array.isRequired,
+    handleClick: PropTypes.func,
 }
 
 export default Form;
