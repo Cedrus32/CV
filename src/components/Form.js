@@ -22,9 +22,9 @@ class Form extends Component {
         this.props.formLabels.forEach((label, index) => {
             let itemKey = `${this.props.formKey}-${index}`;
             if (label === 'Responsibilities' || label === 'Activities and Awards') {
-                inputItems.push(<InputList key={itemKey} formKey={itemKey} label={label}/>);
+                inputItems.push(<InputList key={itemKey} listID={itemKey} label={label}/>);
             } else {
-                inputItems.push(<InputItem key={itemKey} formKey={itemKey} label={label}/>)
+                inputItems.push(<InputItem key={itemKey} itemID={itemKey} label={label}/>)
             }
         });
 
