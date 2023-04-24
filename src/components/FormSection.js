@@ -26,12 +26,9 @@ class FormSection extends Component {
     
     addForm() {
         let newID = uniqid();
-        let newForm = {id: newID,
-                       object: <Form formKey={newID} formType={this.props.formType} formLabels={this.props.formContent.labels} handleClick={this.removeForm}/>
-                      };
-        this.setState({forms: [...this.state.forms, newForm]});
+        this.setState({forms: [...this.state.forms, {id: newID, object: <Form formKey={newID} formType={this.props.formType} formLabels={this.props.formContent.labels} handleClick={this.removeForm}/>}]});
     }
-    removeForm(e) { // todo use key prop to index into state
+    removeForm(e) {
         this.setState({forms: this.state.forms.filter(form => form.id !== e.target.dataset.formKey)});
     }
 
