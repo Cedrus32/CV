@@ -22,15 +22,15 @@ class Form extends Component {
         this.props.formLabels.forEach((label, index) => {
             let itemKey = `${this.props.formKey}-${index}`;
             if (label === 'Responsibilities' || label === 'Activities and Awards') {
-                inputItems.push(<InputList key={itemKey} id={itemKey} label={label}/>);
+                inputItems.push(<InputList key={itemKey} formKey={itemKey} label={label}/>);
             } else {
-                inputItems.push(<InputItem key={itemKey} id={itemKey} label={label}/>)
+                inputItems.push(<InputItem key={itemKey} formKey={itemKey} label={label}/>)
             }
         });
 
         let removeBtn;
         if (this.props.formType !== 'p') {
-            removeBtn = <Button idName={this.props.formKey} handleClick={this.props.handleClick} buttonContent='Remove'/>
+            removeBtn = <Button formKey={this.props.formKey} handleClick={this.props.handleClick} buttonContent='Remove'/>
         }
 
         return (

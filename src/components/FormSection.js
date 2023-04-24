@@ -31,11 +31,8 @@ class FormSection extends Component {
                       };
         this.setState({forms: [...this.state.forms, newForm]});
     }
-    removeForm(e) {
-        let formsCopy = this.state.forms;
-        let targetIndex = formsCopy.findIndex(object => object.id === e.target.id );
-        formsCopy.splice(targetIndex, 1);
-        this.setState({forms: formsCopy});
+    removeForm(e) { // todo use key prop to index into state
+        this.setState({forms: this.state.forms.filter(form => form.id !== e.target.dataset.formKey)});
     }
 
     componentDidUpdate() { // ! testing only
