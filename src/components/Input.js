@@ -11,10 +11,10 @@ class Input extends Component {
     }
 }
 Input.propTypes = {
-    handleFocus: PropTypes.func,
-    handleChange: PropTypes.func,
     inputType: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    handleFocus: PropTypes.func,
+    handleChange: PropTypes.func,
 }
 
 export default Input;
