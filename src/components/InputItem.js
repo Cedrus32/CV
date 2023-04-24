@@ -3,33 +3,36 @@ import PropTypes from 'prop-types';
 import Input from './Input';
 
 class InputItem extends Component {
-    render() {
-        let type;
+    getType(label) {
         if (this.props.label === 'Website') {
-            type = 'url';
+            return 'url';
         } else if (this.props.label === 'Phone') {
-            type = 'tel';
+            return 'tel';
         } else if (this.props.label === 'Email') {
-            type = 'email';
+            return 'email';
         } else if (this.props.label === 'Objective for Applying') {
-            type = 'textbox';
+            return 'textbox';
         } else if (this.props.label === 'Start' || this.props.label === 'End' || this.props.label === 'Graduated') {
-            type = 'date';
+            return 'date';
         } else {
-            type='text';
+            return 'text';
         }
+    }
+
+    render() {
+        let type = this.getType(this.props.label);
 
         return (
             <div>
-                <label htmlFor={this.props.id}>{this.props.label}:</label>
-                <Input inputType={type} id={this.props.id}/>
+                <label htmlFor={this.props.itemID}>{this.props.label}:</label>
+                <Input inputType={type} id={this.props.itemID}/>
             </div>
         );
     }
 
 }
 InputItem.propTypes = {
-    id: PropTypes.string.isRequired,
+    itemID: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
 }
 
