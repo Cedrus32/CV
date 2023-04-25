@@ -34,10 +34,10 @@ class Form extends Component {
         }
 
         return (
-            <>
+            <div key={this.props.formKey}>
                 {inputItems}
                 {removeBtn}
-            </>
+            </div>
         )
     }
 }

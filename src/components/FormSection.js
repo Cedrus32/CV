@@ -26,7 +26,7 @@ class FormSection extends Component {
     
     addForm() {
         let newID = uniqid();
-        this.setState({forms: [...this.state.forms, {id: newID, object: <Form formKey={newID} formType={this.props.formType} formLabels={this.props.formContent.labels} handleClick={this.removeForm}/>}]});
+        this.setState({forms: [...this.state.forms, {id: newID, object: <Form key={newID} formKey={newID} formType={this.props.formType} formLabels={this.props.formContent.labels} handleClick={this.removeForm}/>}]});
     }
     removeForm(e) {
         this.setState({forms: this.state.forms.filter(form => form.id !== e.target.dataset.formKey)});
@@ -43,14 +43,15 @@ class FormSection extends Component {
     }
 
     render() {
+        let formObjects = [];
+        this.state.forms.forEach(form => {
+            formObjects.push(form.object);
+        });
+        
         return (
             <section id={this.props.formType}>
                 <h1 className='form-header'>{this.props.formContent.title}</h1>
-                {this.state.forms.map(form => (
-                    <div key={form.id}>
-                        {form.object}
-                    </div>
-                ))}
+                {formObjects}
                 {this.state.addBtn}
             </section>
         );
