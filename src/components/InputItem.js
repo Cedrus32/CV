@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import Input from './Input';
 
 class InputItem extends Component {
-    getType(label) {
-        if (this.props.label === 'Website') {
+    getType(id) {
+        if (id === 'website') {
             return 'url';
-        } else if (this.props.label === 'Phone') {
+        } else if (id === 'phone') {
             return 'tel';
-        } else if (this.props.label === 'Email') {
+        } else if (id === 'email') {
             return 'email';
-        } else if (this.props.label === 'Objective for Applying') {
-            return 'textbox';
-        } else if (this.props.label === 'Start' || this.props.label === 'End' || this.props.label === 'Graduated') {
+        } else if (id === 'start-date' || id === 'end-date' || id === 'graduate-date') {
             return 'date';
         } else {
             return 'text';
@@ -20,20 +18,22 @@ class InputItem extends Component {
     }
 
     render() {
-        let type = this.getType(this.props.label);
+        console.log(this.props);
+        let type = this.getType(this.props.itemLabel);
 
         return (
             <div>
-                <label htmlFor={this.props.itemID}>{this.props.label}:</label>
-                <Input inputType={type} id={this.props.itemID}/>
+                <label htmlFor={this.props.itemID}>{this.props.itemLabel}:</label>
+                <Input inputKey={this.props.itemKey} id={this.props.itemID} inputType={type}/>
             </div>
         );
     }
 
 }
 InputItem.propTypes = {
+    itemKey: PropTypes.string.isRequired,
     itemID: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired
+    itemLabel: PropTypes.string.isRequired
 }
 
 export default InputItem;

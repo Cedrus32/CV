@@ -7,15 +7,18 @@ class App extends Component {
         this.content = {
             personal: {
                 title: 'Personal Details',
-                labels: ['Name', 'Website', 'Location', 'Phone', 'Email', 'Objective for Applying']
+                labels: ['Name', 'Website', 'Location', 'Phone', 'Email', 'Objective for Applying'],
+                ids: ['name', 'website', 'location', 'phone', 'email', 'objective']
             },
             work: {
                 title: 'Work Experience',
-                labels: ['Position', 'Company', 'Location', 'Start', 'End', 'Responsibilities']
+                labels: ['Position', 'Company', 'Location', 'Start', 'End', 'Responsibilities'],
+                ids: ['position', 'company', 'location', 'start-date', 'end-date', 'responsibilities']
             },
             education: {
                 title: 'Education',
-                labels: ['Field of Study', 'Institution', 'Location', 'Graduated', 'Activities and Awards'] 
+                labels: ['Field of Study', 'Institution', 'Location', 'Graduated', 'Activities and Awards'],
+                ids: ['field-of-study', 'institution', 'location', 'graduated-date', 'activities-and-awards']
             }
         }
     }

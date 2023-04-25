@@ -13,8 +13,8 @@ class Input extends Component {
 }
 Input.propTypes = {
     inputKey: PropTypes.string,
-    inputType: PropTypes.string,
     id: PropTypes.string.isRequired,
+    inputType: PropTypes.string,
     handleFocus: PropTypes.func,
     handleChange: PropTypes.func,
 }

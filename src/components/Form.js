@@ -16,18 +16,18 @@ class Form extends Component {
     }
 
     render() {
-        console.log('form key', this.props.formKey);
-
         let inputElements = [];
-        this.props.formLabels.forEach((label, index) => {
-            let itemKey = `${this.props.formKey}-${index}`;
-            if (label === 'Responsibilities' || label === 'Activities and Awards') {
-                inputElements.push(<InputList key={itemKey} listID={itemKey} label={label}/>);
+        for (let i = 0; i < this.props.formIDs.length; i++) {
+            let objectKey = `${this.props.formKey}-${i}`;
+            let objectLabel = this.props.formLabels[i];
+            let objectID = this.props.formIDs[i]
+            if (this.props.formIDs[i] === 'responsibilities' || this.props.formIDs[i] === 'activities-and-awards') {
+                inputElements.push(<InputList key={objectKey} listKey={objectKey} listID={objectID} listLabel={objectLabel}/>);
             } else {
-                inputElements.push(<InputItem key={itemKey} itemID={itemKey} label={label}/>)
+                inputElements.push(<InputItem key={objectKey} itemKey={objectKey} itemID={objectID} itemLabel={objectLabel}/>)
             }
-        });
-
+        }
+        
         let removeBtn;
         if (this.props.formType !== 'p') {
             removeBtn = <Button formKey={this.props.formKey} handleClick={this.props.handleClick} buttonContent='Remove'/>
@@ -43,6 +43,7 @@ class Form extends Component {
 }
 Form.propTypes = {
     formKey: PropTypes.string.isRequired,
+    formIDs: PropTypes.array.isRequired,
     formType: PropTypes.string.isRequired,
     formLabels: PropTypes.array.isRequired,
     handleClick: PropTypes.func,

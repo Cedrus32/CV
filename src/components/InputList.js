@@ -21,8 +21,8 @@ class InputList extends Component {
 
     addItem() {
         let newID = uniqid();
-        let inputKey = `${this.props.listID}-${newID}`;
-        this.setState({list: [...this.state.list, {id: inputKey, input: <Input key={inputKey} inputKey={inputKey} id={inputKey} handleFocus={this.handleFocus} handleChange={this.handleChange} inputType='text'/>}]});
+        let objectKey = `${this.props.listKey}-${newID}`;
+        this.setState({list: [...this.state.list, {id: objectKey, input: <Input key={objectKey} inputKey={objectKey} id={objectKey} handleFocus={this.handleFocus}/>}]});
     }
 
     removeItem() {
@@ -37,6 +37,8 @@ class InputList extends Component {
     
     render() {
         // style with grid
+        console.log(this.props);
+        
         let inputItems = [];
         this.state.list.forEach(item => {
             inputItems.push(item.input);
@@ -45,7 +47,7 @@ class InputList extends Component {
 
         return (
             <div>
-                <label htmlFor={this.props.listID}>{this.props.label}:</label>
+                <label htmlFor={this.props.listID}>{this.props.listLabel}:</label>
                 <Button handleClick={this.addItem} buttonContent='+'/>
                 <Button handleClick={this.removeItem} buttonContent='-'/>
                 <div className='item-container'>
@@ -56,8 +58,9 @@ class InputList extends Component {
     }
 }
 InputList.propTypes = {
+    listKey: PropTypes.string.isRequired,
     listID: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired
+    listLabel: PropTypes.string.isRequired
 }
 
 export default InputList;

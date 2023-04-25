@@ -25,11 +25,11 @@ class FormSection extends Component {
     }
     
     addForm() {
-        let newID = uniqid();
-        this.setState({forms: [...this.state.forms, {id: newID, object: <Form key={newID} formKey={newID} formType={this.props.formType} formLabels={this.props.formContent.labels} handleClick={this.removeForm}/>}]});
+        let newKey = uniqid();
+        this.setState({forms: [...this.state.forms, {formKey: newKey, object: <Form key={newKey} formKey={newKey} formType={this.props.formType} formLabels={this.props.formContent.labels} formIDs={this.props.formContent.ids} handleClick={this.removeForm}/>}]});
     }
     removeForm(e) {
-        this.setState({forms: this.state.forms.filter(form => form.id !== e.target.dataset.formKey)});
+        this.setState({forms: this.state.forms.filter(form => form.formKey !== e.target.dataset.formKey)});
     }
 
     componentDidUpdate() { // ! testing only
@@ -43,13 +43,22 @@ class FormSection extends Component {
     }
 
     render() {
+        let sectionID;
+        if (this.props.formType === 'p') {
+            sectionID = 'personal';
+        } else if (this.props.formType === 'w') {
+            sectionID = 'work';
+        } else if (this.props.formType === 'e') {
+            sectionID = 'education';
+        }
+
         let formObjects = [];
         this.state.forms.forEach(form => {
             formObjects.push(form.object);
         });
         
         return (
-            <section id={this.props.formType}>
+            <section id={sectionID}>
                 <h1 className='form-header'>{this.props.formContent.title}</h1>
                 {formObjects}
                 {this.state.addBtn}
