@@ -18,13 +18,13 @@ class Form extends Component {
     render() {
         console.log('form key', this.props.formKey);
 
-        let inputItems = [];
+        let inputElements = [];
         this.props.formLabels.forEach((label, index) => {
             let itemKey = `${this.props.formKey}-${index}`;
             if (label === 'Responsibilities' || label === 'Activities and Awards') {
-                inputItems.push(<InputList key={itemKey} listID={itemKey} label={label}/>);
+                inputElements.push(<InputList key={itemKey} listID={itemKey} label={label}/>);
             } else {
-                inputItems.push(<InputItem key={itemKey} itemID={itemKey} label={label}/>)
+                inputElements.push(<InputItem key={itemKey} itemID={itemKey} label={label}/>)
             }
         });
 
@@ -35,7 +35,7 @@ class Form extends Component {
 
         return (
             <div key={this.props.formKey}>
-                {inputItems}
+                {inputElements}
                 {removeBtn}
             </div>
         )
