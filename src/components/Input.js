@@ -7,7 +7,7 @@ class Input extends Component {
         // todo make id descriptive, use data-inputKey for state queries
         
         return (
-            <input key={this.props.inputKey} data-input-key={this.props.inputKey} type={this.props.inputType} id={this.props.id} onFocus={this.props.handleFocus} onChange={this.props.handleChange}></input>
+            <input key={this.props.inputKey} data-input-key={this.props.inputKey} type={this.props.inputType} id={this.props.id} onFocus={this.props.handleFocus}></input>
         )
     }
 }
