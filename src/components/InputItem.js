@@ -22,7 +22,7 @@ class InputItem extends Component {
         let type = this.getType(this.props.itemLabel);
 
         return (
-            <div>
+            <div className='input-item'>
                 <label htmlFor={this.props.itemID}>{this.props.itemLabel}:</label>
                 <Input inputKey={this.props.itemKey} id={this.props.itemID} inputType={type}/>
             </div>
