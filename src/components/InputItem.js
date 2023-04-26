@@ -24,7 +24,7 @@ class InputItem extends Component {
         return (
             <div className='input-item'>
                 <label htmlFor={this.props.itemID}>{this.props.itemLabel}:</label>
-                <Input inputKey={this.props.itemKey} id={this.props.itemID} inputType={type}/>
+                <Input inputKey={this.props.itemKey} inputID={this.props.itemID} inputType={type}/>
             </div>
         );
     }
