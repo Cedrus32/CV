@@ -42,7 +42,7 @@ class InputList extends Component {
         let inputItems = [];
         this.state.list.forEach(item => {
             inputItems.push(item.input);
-        })
+        });
         console.log(inputItems);
 
         return (
