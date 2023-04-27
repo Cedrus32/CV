@@ -2,3 +2,47 @@ body {
     background-color: black;
     color: grey;
 }
+
+#root,
+form div:not(.item-container) {
+    display: grid;
+}
+
+#root {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'interact display';
+}
+
+    .input-item {
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr;
+    }
+
+    .input-list {
+        grid-template-columns: 5fr 1fr 12fr;
+        grid-template-areas: 'list-label add-btn    list-area'
+                             'list-label remove-btn list-area'
+    }
+
+        .input-list label {
+            grid-area: list-label;
+        }
+
+        .add {
+            grid-area: add-btn;
+        }
+
+        .remove {
+            grid-area: remove-btn;
+        }
+
+        .item-container {
+            grid-area: list-area;
+            height: calc(1.15em * 4);
+            overflow: auto;
+        }
+
+input {
+    width: 100%;
+}
