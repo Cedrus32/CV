@@ -27,17 +27,17 @@ class Form extends Component {
                 inputElements.push(<InputItem key={objectKey} itemKey={objectKey} itemID={objectID} itemLabel={objectLabel}/>)
             }
         }
-        
+
         let removeBtn;
         if (this.props.formType !== 'p') {
             removeBtn = <Button formKey={this.props.formKey} handleClick={this.props.handleClick} buttonContent='Remove'/>
         }
 
         return (
-            <div key={this.props.formKey}>
+            <form key={this.props.formKey}>
                 {inputElements}
                 {removeBtn}
-            </div>
+            </form>
         )
     }
 }
