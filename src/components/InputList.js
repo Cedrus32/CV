@@ -12,6 +12,7 @@ class InputList extends Component {
         this.state = {
             list: [],
             currentTarget: null,
+            listLength: 0,
         }
 
         this.addItem = this.addItem.bind(this);
@@ -22,13 +23,15 @@ class InputList extends Component {
     addItem() {
         let newID = uniqid();
         let objectKey = `${this.props.listKey}-${newID}`;
-        this.setState({list: [...this.state.list, {inputKey: objectKey, input: <Input key={objectKey} inputKey={objectKey} handleFocus={this.handleFocus}/>}]});
+        this.setState({list: [...this.state.list, {inputKey: objectKey, input: <Input key={objectKey} inputKey={objectKey} inputID={this.state.listLength.toString()} handleFocus={this.handleFocus}/>}]});
+        this.setState({listLength: this.state.listLength + 1});
     }
 
     removeItem() {
         this.setState({list: this.state.list.filter(item =>
             item.inputKey !== this.state.currentTarget
         )});
+        // todo re-index id's, include which form (work-1-responsibility-1) (must be stored as set of string values)
     }
 
     handleFocus(e) {
