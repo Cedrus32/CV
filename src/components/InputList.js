@@ -51,8 +51,8 @@ class InputList extends Component {
         return (
             <div className='input-list'>
                 <label htmlFor={this.props.listID}>{this.props.listLabel}:</label>
-                <Button handleClick={this.addItem} buttonContent='+'/>
-                <Button handleClick={this.removeItem} buttonContent='-'/>
+                <Button handleClick={this.addItem} className={'add'} buttonContent='+'/>
+                <Button handleClick={this.removeItem} className={'remove'} buttonContent='-'/>
                 <div className='item-container'>
                     {inputItems}
                 </div>
