@@ -11,42 +11,45 @@ class InputList extends Component {
         super(props);
         this.state = {
             list: [],
-            currentTarget: null,
+            targetKey: null,
+            targetIndex: null,
             listLength: 0,
         }
 
         this.addItem = this.addItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     addItem() {
         let newID = uniqid();
         let objectKey = `${this.props.listKey}-${newID}`;
-        this.setState({list: [...this.state.list, {inputKey: objectKey, input: <Input key={objectKey} inputKey={objectKey} inputID={this.state.listLength.toString()} handleFocus={this.handleFocus}/>}]});
+        this.setState({list: [...this.state.list, {inputKey: objectKey, inputValue: ''}]}); 
         this.setState({listLength: this.state.listLength + 1});
-    }
-
-    removeItem() {
-        this.setState({list: this.state.list.filter(item =>
-            item.inputKey !== this.state.currentTarget
-        )});
         // todo re-index id's, include which form (work-1-responsibility-1) (must be stored as set of string values)
     }
 
+    removeItem() {
+        this.setState({list: this.state.list.filter(object => object.inputKey !== this.state.targetKey)});
+    }
+
     handleFocus(e) {
-        this.setState({currentTarget: e.target.dataset.inputKey});
+        this.setState({targetKey: e.target.dataset.inputKey});
+        this.setState({targetIndex: this.state.list.findIndex(object => object.inputKey === e.target.dataset.inputKey)});
+    }
+
+    handleChange(e) {
+        let listCopy = this.state.list;
+        listCopy[this.state.targetIndex].inputValue = e.target.value;
+        this.setState({list: listCopy});
     }
     
     render() {
-        // style with grid
-        console.log(this.props);
-
         let inputItems = [];
-        this.state.list.forEach(item => {
-            inputItems.push(item.input);
+        this.state.list.forEach(object => {
+            inputItems.push(<Input key={object.inputKey} inputKey={object.inputKey} inputID={this.state.listLength.toString()} handleFocus={this.handleFocus} handleChange={this.handleChange} value={object.inputValue}/>);
         });
-        console.log(inputItems);
 
         return (
             <div className='input-list'>
