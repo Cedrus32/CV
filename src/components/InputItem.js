@@ -28,7 +28,7 @@ class InputItem extends Component {
         }
 
         return (
-            <div className='input-item'>
+            <div>
                 <label htmlFor={this.props.itemID}>{this.props.itemLabel}:</label>
                 {element}
             </div>
