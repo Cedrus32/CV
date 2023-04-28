@@ -51,16 +51,6 @@ class FormSection extends Component {
         this.setState({forms: formsCopy});
     }
 
-    componentDidUpdate() { // ! testing only
-        console.log('******');
-        console.log(this.props.formType, 'component did update');
-        console.log('state', this.state);
-        // this.state.forms.forEach(form => (
-        //     console.log(form.id, form.items)
-        // ));
-        console.log('******');
-    }
-
     render() {
         let sectionID;
         if (this.props.formType === 'p') {
@@ -72,12 +62,8 @@ class FormSection extends Component {
         }
 
         let removeFormCB;
-        let addItemCB;
-        let removeItemCB;
         if (this.props.formType !== 'p') {
             removeFormCB = this.removeForm;
-            addItemCB = this.addItem;
-            removeItemCB = this.removeItem;
         }
 
         let formElements = [];
@@ -88,8 +74,6 @@ class FormSection extends Component {
                                     formLabels={this.props.formContent.labels}
                                     formIDs={this.props.formContent.ids}
                                     removeForm={removeFormCB}
-                                    addItem={addItemCB}
-                                    removeItem={removeItemCB}
                                     changeFocus={this.changeFocus}
                                     changeValue={this.changeValue}/>);
         });
