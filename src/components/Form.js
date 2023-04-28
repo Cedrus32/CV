@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import InputList from './InputList';
 import InputItem from './InputItem';
 import Button from './Button';
 
@@ -11,11 +10,12 @@ class Form extends Component {
             let objectKey = `${this.props.formKey}-${i}`;
             let objectLabel = this.props.formLabels[i];
             let objectID = this.props.formIDs[i];
-            if (this.props.formIDs[i] === 'responsibilities' || this.props.formIDs[i] === 'activities-and-awards') {
-                inputElements.push(<InputList key={objectKey} listKey={objectKey} listID={objectID} listLabel={objectLabel}/>);
-            } else {
-                inputElements.push(<InputItem key={objectKey} itemKey={objectKey} itemID={objectID} itemLabel={objectLabel}/>)
-            }
+            inputElements.push(<InputItem key={objectKey}
+                itemKey={objectKey}
+                itemID={objectID}
+                changeFocus={this.props.changeFocus}
+                changeValue={this.props.changeValue}
+                itemLabel={objectLabel}/>)
         }
 
         let removeBtn;
@@ -39,7 +39,8 @@ Form.propTypes = {
     removeForm: PropTypes.func,
     addItem: PropTypes.func,
     removeItem: PropTypes.func,
-    handleChange: PropTypes.func,
+    changeFocus: PropTypes.func.isRequired,
+    changeValue: PropTypes.func.isRequired,
 }
 
 export default Form;

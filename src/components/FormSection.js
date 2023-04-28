@@ -9,16 +9,15 @@ class FormSection extends Component {
         super(props);
         this.state = {
             forms: [],
-            targetKey: null,
-            targetIndex: null,
+            targetFormIndex: null,
+            targetItemIndex: null,
             addBtn: false,
         }
 
         this.addForm = this.addForm.bind(this);
         this.removeForm = this.removeForm.bind(this);
-        this.addItem = this.addItem.bind(this);
-        this.removeItem = this.removeItem.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.changeFocus = this.changeFocus.bind(this);
+        this.changeValue = this.changeValue.bind(this);
     }
 
     componentDidMount() {
@@ -30,34 +29,26 @@ class FormSection extends Component {
     }
     
     addForm() {
-        let newFormKey = uniqid();
-        let inputObjects = [];
+        let formKey = uniqid();
+        let formItems = [];
         for (let i = 0; i < this.props.formContent.ids.length; i++) {
-            let objectKey = `${newFormKey}-${i}`
-            if (this.props.formContent.ids[i] === 'responsibilities' || this.props.formContent.ids[i] === 'activities-and-awards') {
-                inputObjects.push({listKey: objectKey, inputList: []});
-            } else {
-                inputObjects.push({itemKey: objectKey, itemValue: ''});
-            }
+            let itemKey = `${formKey}-${i}`;
+            formItems.push({itemKey: itemKey, itemValue: ''});
         }
-        if (this.props.formType === 'p') {
-            this.setState({forms: [...this.state.forms, {formKey: newFormKey, formInputs: inputObjects}]});    
-        } else {
-            this.setState({forms: [...this.state.forms, {formKey: newFormKey, listLength: 0, formInputs: inputObjects}]});
-        }
+        this.setState({forms: [...this.state.forms, {formKey: formKey, formItems: formItems}]});
     }
     removeForm(e) {
         this.setState({forms: this.state.forms.filter(form => form.formKey !== e.target.dataset.formKey)});
     }
 
-    addItem() {
-        // add item to inputList
+    changeFocus(e) {
+        this.setState({targetFormIndex: this.state.forms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0])});
+        this.setState({targetItemIndex: parseInt(e.target.dataset.inputKey.split('-')[1])});
     }
-    removeItem() {
-        // remove item from inputList
-    }
-    handleChange() {
-        // change item value
+    changeValue(e) {
+        let formsCopy = this.state.forms;
+        formsCopy[this.state.targetFormIndex].formItems[this.state.targetItemIndex].value = e.target.value;
+        this.setState({forms: formsCopy});
     }
 
     componentDidUpdate() { // ! testing only
@@ -99,7 +90,8 @@ class FormSection extends Component {
                                     removeForm={removeFormCB}
                                     addItem={addItemCB}
                                     removeItem={removeItemCB}
-                                    handleChange={this.handleChange}/>);
+                                    changeFocus={this.changeFocus}
+                                    changeValue={this.changeValue}/>);
         });
         
         let addBtn;
