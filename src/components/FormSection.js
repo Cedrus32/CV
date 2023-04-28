@@ -9,7 +9,7 @@ class FormSection extends Component {
         super(props);
         this.state = {
             forms: [],
-            addBtn: null,
+            addBtn: false,
         }
 
         this.addForm = this.addForm.bind(this);
@@ -20,13 +20,27 @@ class FormSection extends Component {
         if (this.props.formType === 'p') {
             this.addForm();
         } else {
-            this.setState({addBtn: <Button handleClick={this.addForm} buttonContent='Add'/>})
+            this.setState({addBtn: true});
         }
     }
     
     addForm() {
-        let newKey = uniqid();
-        this.setState({forms: [...this.state.forms, {formKey: newKey, object: <Form key={newKey} formKey={newKey} formType={this.props.formType} formLabels={this.props.formContent.labels} formIDs={this.props.formContent.ids} handleClick={this.removeForm}/>}]});
+        let newFormKey = uniqid();
+        let inputObjects = [];
+        for (let i = 0; i < this.props.formContent.ids.length; i++) {
+            let objectKey = `${newFormKey}-${i}`
+            if (this.props.formContent.ids[i] === 'responsibilities' || this.props.formContent.ids[i] === 'activities-and-awards') {
+                inputObjects.push({listKey: objectKey, inputList: []});
+            } else {
+                inputObjects.push({itemKey: objectKey, itemValue: ''});
+            }
+        }
+        if (this.props.formType === 'p') {
+            this.setState({forms: [...this.state.forms, {formKey: newFormKey, formInputs: inputObjects, targetKey: null, targetIndex: null}]});    
+        } else {
+            this.setState({forms: [...this.state.forms, {formKey: newFormKey, listLength: 0, formInputs: inputObjects, targetKey: null, targetIndex: null}]});
+        }
+        // <Form key={newKey} formKey={newKey} formType={this.props.formType} formLabels={this.props.formContent.labels} formIDs={this.props.formContent.ids} handleClick={this.removeForm}/>
     }
     removeForm(e) {
         this.setState({forms: this.state.forms.filter(form => form.formKey !== e.target.dataset.formKey)});
@@ -53,15 +67,20 @@ class FormSection extends Component {
         }
 
         let formObjects = [];
-        this.state.forms.forEach(form => {
-            formObjects.push(form.object);
+        this.state.forms.forEach(object => {
+            formObjects.push(<Form key={object.formKey} formKey={object.formKey} formType={this.props.formType} formLabels={this.props.formContent.labels} formIDs={this.props.formContent.ids} handleClick={this.removeForm}/>);
         });
+        
+        let addBtn;
+        if (this.state.addBtn === true) {
+            addBtn = <Button handleClick={this.addForm} buttonContent='Add'/>
+        }
         
         return (
             <section id={sectionID}>
                 <h1 className='form-header'>{this.props.formContent.title}</h1>
                 {formObjects}
-                {this.state.addBtn}
+                {addBtn}
             </section>
         );
     }
