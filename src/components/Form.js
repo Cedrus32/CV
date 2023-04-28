@@ -37,8 +37,6 @@ Form.propTypes = {
     formLabels: PropTypes.array.isRequired,
     formIDs: PropTypes.array.isRequired,
     removeForm: PropTypes.func,
-    addItem: PropTypes.func,
-    removeItem: PropTypes.func,
     changeFocus: PropTypes.func.isRequired,
     changeValue: PropTypes.func.isRequired,
 }
