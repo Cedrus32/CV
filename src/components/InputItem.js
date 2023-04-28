@@ -9,7 +9,7 @@ class InputItem extends Component {
             return 'tel';
         } else if (id === 'email') {
             return 'email';
-        } else if (id === 'start-date' || id === 'end-date' || id === 'graduate-date') {
+        } else if (id === 'start-date' || id === 'end-date' || id === 'graduated-date') {
             return 'date';
         } else if (id === 'responsibilities' || id === 'activities-and-awards') {
             return 'textarea';
