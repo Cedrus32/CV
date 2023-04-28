@@ -4,8 +4,6 @@ import uniqid from 'uniqid';
 import Input from './Input';
 import Button from './Button';
 
-// todo refactor methods to reduce state copies and redundant code
-
 class InputList extends Component {
     constructor(props) {
         super(props);

@@ -9,11 +9,16 @@ class FormSection extends Component {
         super(props);
         this.state = {
             forms: [],
+            targetKey: null,
+            targetIndex: null,
             addBtn: false,
         }
 
         this.addForm = this.addForm.bind(this);
         this.removeForm = this.removeForm.bind(this);
+        this.addItem = this.addItem.bind(this);
+        this.removeItem = this.removeItem.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -36,14 +41,23 @@ class FormSection extends Component {
             }
         }
         if (this.props.formType === 'p') {
-            this.setState({forms: [...this.state.forms, {formKey: newFormKey, formInputs: inputObjects, targetKey: null, targetIndex: null}]});    
+            this.setState({forms: [...this.state.forms, {formKey: newFormKey, formInputs: inputObjects}]});    
         } else {
-            this.setState({forms: [...this.state.forms, {formKey: newFormKey, listLength: 0, formInputs: inputObjects, targetKey: null, targetIndex: null}]});
+            this.setState({forms: [...this.state.forms, {formKey: newFormKey, listLength: 0, formInputs: inputObjects}]});
         }
-        // <Form key={newKey} formKey={newKey} formType={this.props.formType} formLabels={this.props.formContent.labels} formIDs={this.props.formContent.ids} handleClick={this.removeForm}/>
     }
     removeForm(e) {
         this.setState({forms: this.state.forms.filter(form => form.formKey !== e.target.dataset.formKey)});
+    }
+
+    addItem() {
+        // add item to inputList
+    }
+    removeItem() {
+        // remove item from inputList
+    }
+    handleChange() {
+        // change item value
     }
 
     componentDidUpdate() { // ! testing only
@@ -66,9 +80,26 @@ class FormSection extends Component {
             sectionID = 'education';
         }
 
-        let formObjects = [];
+        let removeFormCB;
+        let addItemCB;
+        let removeItemCB;
+        if (this.props.formType !== 'p') {
+            removeFormCB = this.removeForm;
+            addItemCB = this.addItem;
+            removeItemCB = this.removeItem;
+        }
+
+        let formElements = [];
         this.state.forms.forEach(object => {
-            formObjects.push(<Form key={object.formKey} formKey={object.formKey} formType={this.props.formType} formLabels={this.props.formContent.labels} formIDs={this.props.formContent.ids} handleClick={this.removeForm}/>);
+            formElements.push(<Form key={object.formKey}
+                                    formKey={object.formKey}
+                                    formType={this.props.formType}
+                                    formLabels={this.props.formContent.labels}
+                                    formIDs={this.props.formContent.ids}
+                                    removeForm={removeFormCB}
+                                    addItem={addItemCB}
+                                    removeItem={removeItemCB}
+                                    handleChange={this.handleChange}/>);
         });
         
         let addBtn;
@@ -79,7 +110,7 @@ class FormSection extends Component {
         return (
             <section id={sectionID}>
                 <h1 className='form-header'>{this.props.formContent.title}</h1>
-                {formObjects}
+                {formElements}
                 {addBtn}
             </section>
         );
