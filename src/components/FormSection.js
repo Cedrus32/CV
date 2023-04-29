@@ -79,7 +79,7 @@ class FormSection extends Component {
         });
         
         let addBtn;
-        if (this.state.addBtn === true) {
+        if (this.props.formType !== 'p') {
             addBtn = <Button handleClick={this.addForm} buttonContent='Add'/>
         }
         
