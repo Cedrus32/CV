@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import uniqid from 'uniqid';
 import Form from './Form';
 import Button from './Button';
 
@@ -13,27 +12,11 @@ class FormSection extends Component {
             targetItemIndex: null,
         }
 
-        this.addForm = this.addForm.bind(this);
         this.removeForm = this.removeForm.bind(this);
         this.changeFocus = this.changeFocus.bind(this);
         this.changeValue = this.changeValue.bind(this);
     }
-
-    componentDidMount() {
-        if (this.props.formType === 'p') {
-            this.addForm();
-        }
-    }
     
-    addForm() {
-        let formKey = uniqid();
-        let formItems = [];
-        for (let i = 0; i < this.props.formContent.ids.length; i++) {
-            let itemKey = `${formKey}-${i}`;
-            formItems.push({itemKey: itemKey, itemValue: ''});
-        }
-        this.setState({forms: [...this.state.forms, {formKey: formKey, formItems: formItems}]});
-    }
     removeForm(e) {
         this.setState({forms: this.state.forms.filter(form => form.formKey !== e.target.dataset.formKey)});
     }
@@ -58,31 +41,26 @@ class FormSection extends Component {
             sectionID = 'education';
         }
 
-        let removeFormCB;
-        if (this.props.formType !== 'p') {
-            removeFormCB = this.removeForm;
-        }
-
         let formElements = [];
-        this.state.forms.forEach(object => {
+        this.props.forms.forEach(object => {
             formElements.push(<Form key={object.formKey}
                                     formKey={object.formKey}
                                     formType={this.props.formType}
-                                    formLabels={this.props.formContent.labels}
-                                    formIDs={this.props.formContent.ids}
-                                    removeForm={removeFormCB}
+                                    formLabels={this.props.meta.labels}
+                                    formIDs={this.props.meta.ids}
+                                    removeForm={this.props.removeForm}
                                     changeFocus={this.changeFocus}
                                     changeValue={this.changeValue}/>);
         });
         
         let addBtn;
         if (this.props.formType !== 'p') {
-            addBtn = <Button handleClick={this.addForm} buttonContent='Add'/>
+            addBtn = <Button handleClick={this.props.addForm} buttonContent='Add'/>
         }
         
         return (
             <section id={sectionID}>
-                <h1 className='form-header'>{this.props.formContent.title}</h1>
+                <h1 className='form-header'>{this.props.meta.title}</h1>
                 {formElements}
                 {addBtn}
             </section>
@@ -91,7 +69,11 @@ class FormSection extends Component {
 }
 FormSection.propTypes = {
     formType: PropTypes.string.isRequired,
-    formContent: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired,
+    forms: PropTypes.array.isRequired,
+    addForm: PropTypes.func,
+    removeForm: PropTypes.func,
+    didMount: PropTypes.func,
 };
 
 export default FormSection;
