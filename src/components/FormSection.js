@@ -55,7 +55,7 @@ class FormSection extends Component {
         
         let addBtn;
         if (this.props.formType !== 'p') {
-            addBtn = <Button handleClick={this.props.addForm} buttonContent='Add'/>
+            addBtn = <Button formType={this.props.formType} handleClick={this.props.addForm} buttonContent='Add'/>
         }
         
         return (

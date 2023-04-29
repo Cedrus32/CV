@@ -50,6 +50,8 @@ class App extends Component {
         let formMeta = this.meta[formType];
         let formKey = uniqid();
         let formItems = [];
+        console.log(formType);
+        console.log(formMeta);
         for (let i = 0; i < formMeta.ids.length; i++) {
             let itemKey = `${formKey}-${i}`;
             formItems.push({itemKey: itemKey, itemValue: ''});
