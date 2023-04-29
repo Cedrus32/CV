@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FormSection from './FormSection';
+import Header from './Header';
+import DisplaySection from './DisplaySection';
 
 class App extends Component {
     constructor(props) {
@@ -31,7 +33,11 @@ class App extends Component {
                     <FormSection formType='w' formContent={this.content.work}/>
                     <FormSection formType='e' formContent={this.content.education}/>
                 </section>
-                <section id='display'></section>
+                <section id='display'>
+                    <Header/>
+                    <DisplaySection sectionType='w'/>
+                    <DisplaySection sectionType='e'/>
+                </section>
             </>
         )
     }
