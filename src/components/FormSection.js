@@ -11,7 +11,6 @@ class FormSection extends Component {
             forms: [],
             targetFormIndex: null,
             targetItemIndex: null,
-            addBtn: false,
         }
 
         this.addForm = this.addForm.bind(this);
@@ -23,8 +22,6 @@ class FormSection extends Component {
     componentDidMount() {
         if (this.props.formType === 'p') {
             this.addForm();
-        } else {
-            this.setState({addBtn: true});
         }
     }
     
