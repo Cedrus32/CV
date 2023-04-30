@@ -16,14 +16,7 @@ class FormSection extends Component {
 
         let formElements = [];
         this.props.forms.forEach(object => {
-            formElements.push(<Form key={object.formKey}
-                                    formKey={object.formKey}
-                                    formType={this.props.formType}
-                                    formLabels={this.props.meta.labels}
-                                    formIDs={this.props.meta.ids}
-                                    removeForm={this.props.removeForm}
-                                    changeFocus={this.props.changeFocus}
-                                    changeValue={this.props.changeValue}/>);
+            formElements.push(<Form key={object.formKey} formKey={object.formKey} formType={this.props.formType} formLabels={this.props.meta.labels} formIDs={this.props.meta.ids} removeForm={this.props.removeForm} changeFocus={this.props.changeFocus} changeValue={this.props.changeValue}/>);
         });
         
         let addBtn;
