@@ -36,6 +36,7 @@ class App extends Component {
         this.addForm = this.addForm.bind(this);
         this.removeForm = this.removeForm.bind(this);
         this.changeFocus = this.changeFocus.bind(this);
+        this.changeValue = this.changeValue.bind(this);
     }
 
     componentDidMount() {
@@ -84,14 +85,33 @@ class App extends Component {
         }
         this.setState({targetItemIndex: parseInt(e.target.dataset.inputKey.split('-')[1])});
     }
+    changeValue(e) {
+        let formType = e.target.dataset.formType;
+        let formsCopy;
+        if (formType === 'p') {
+            formsCopy = this.state.personalForms;
+        } else if (formType === 'w') {
+            formsCopy = this.state.workForms;
+        } else if (formType === 'e') {
+            formsCopy = this.state.educationForms;
+        }
+        formsCopy[this.state.targetFormIndex].formItems[this.state.targetItemIndex].itemValue = e.target.value;
+        if (formType === 'p') {
+            this.setState({personalForms: formsCopy});
+        } else if (formType === 'w') {
+            this.setState({workForms: formsCopy});
+        } else if (formType === 'e') {
+            this.setState({educationForms: formsCopy});
+        }
+    }
     
     render() {
         return (
             <>
                 <section id='interact'>
-                    <FormSection formType='p' meta={this.meta.p} forms={this.state.personalForms} didMount={this.componentDidMount} changeFocus={this.changeFocus}/>
-                    <FormSection formType='w' meta={this.meta.w} forms={this.state.workForms} addForm={this.addForm} removeForm={this.removeForm} changeFocus={this.changeFocus}/>
-                    <FormSection formType='e' meta={this.meta.e} forms={this.state.educationForms} addForm={this.addForm} removeForm={this.removeForm} changeFocus={this.changeFocus}/>
+                    <FormSection formType='p' meta={this.meta.p} forms={this.state.personalForms} didMount={this.componentDidMount} changeFocus={this.changeFocus} changeValue={this.changeValue}/>
+                    <FormSection formType='w' meta={this.meta.w} forms={this.state.workForms} addForm={this.addForm} removeForm={this.removeForm} changeFocus={this.changeFocus} changeValue={this.changeValue}/>
+                    <FormSection formType='e' meta={this.meta.e} forms={this.state.educationForms} addForm={this.addForm} removeForm={this.removeForm} changeFocus={this.changeFocus} changeValue={this.changeValue}/>
                 </section>
                 <section id='display'>
                     <Header displayContent={this.state.personalForms}/>

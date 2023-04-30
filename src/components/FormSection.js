@@ -4,23 +4,6 @@ import Form from './Form';
 import Button from './Button';
 
 class FormSection extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            forms: [],
-            targetFormIndex: null,
-            targetItemIndex: null,
-        }
-
-        this.changeValue = this.changeValue.bind(this);
-    }
-
-    changeValue(e) {
-        let formsCopy = this.state.forms;
-        formsCopy[this.state.targetFormIndex].formItems[this.state.targetItemIndex].value = e.target.value;
-        this.setState({forms: formsCopy});
-    }
-
     render() {
         let sectionID;
         if (this.props.formType === 'p') {
@@ -40,7 +23,7 @@ class FormSection extends Component {
                                     formIDs={this.props.meta.ids}
                                     removeForm={this.props.removeForm}
                                     changeFocus={this.props.changeFocus}
-                                    changeValue={this.changeValue}/>);
+                                    changeValue={this.props.changeValue}/>);
         });
         
         let addBtn;
@@ -64,6 +47,7 @@ FormSection.propTypes = {
     addForm: PropTypes.func,
     removeForm: PropTypes.func,
     changeFocus: PropTypes.func.isRequired,
+    changeValue: PropTypes.func.isRequired,
     didMount: PropTypes.func,
 };
 
