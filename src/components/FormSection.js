@@ -12,14 +12,9 @@ class FormSection extends Component {
             targetItemIndex: null,
         }
 
-        this.changeFocus = this.changeFocus.bind(this);
         this.changeValue = this.changeValue.bind(this);
     }
 
-    changeFocus(e) {
-        this.setState({targetFormIndex: this.state.forms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0])});
-        this.setState({targetItemIndex: parseInt(e.target.dataset.inputKey.split('-')[1])});
-    }
     changeValue(e) {
         let formsCopy = this.state.forms;
         formsCopy[this.state.targetFormIndex].formItems[this.state.targetItemIndex].value = e.target.value;
@@ -44,7 +39,7 @@ class FormSection extends Component {
                                     formLabels={this.props.meta.labels}
                                     formIDs={this.props.meta.ids}
                                     removeForm={this.props.removeForm}
-                                    changeFocus={this.changeFocus}
+                                    changeFocus={this.props.changeFocus}
                                     changeValue={this.changeValue}/>);
         });
         
@@ -68,6 +63,7 @@ FormSection.propTypes = {
     forms: PropTypes.array.isRequired,
     addForm: PropTypes.func,
     removeForm: PropTypes.func,
+    changeFocus: PropTypes.func.isRequired,
     didMount: PropTypes.func,
 };
 

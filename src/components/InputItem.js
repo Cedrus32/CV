@@ -22,9 +22,9 @@ class InputItem extends Component {
         let element;
         let inputType = this.getType(this.props.itemID);
         if (inputType === 'textarea') {
-            element = <textarea key={this.props.itemKey} data-input-key={this.props.itemKey} id={this.props.itemID} onFocus={this.props.changeFocus} onChange={this.props.changeValue}></textarea>
+            element = <textarea key={this.props.itemKey} data-input-key={this.props.itemKey} data-form-type={this.props.formType} id={this.props.itemID} onFocus={this.props.changeFocus} onChange={this.props.changeValue}></textarea>
         } else {
-            element = <input key={this.props.itemKey} data-input-key={this.props.itemKey} type={inputType} id={this.props.itemID} onFocus={this.props.changeFocus} onChange={this.props.changeValue}></input>
+            element = <input key={this.props.itemKey} data-input-key={this.props.itemKey} data-form-type={this.props.formType} type={inputType} id={this.props.itemID} onFocus={this.props.changeFocus} onChange={this.props.changeValue}></input>
         }
 
         return (
@@ -38,6 +38,7 @@ class InputItem extends Component {
 }
 InputItem.propTypes = {
     itemKey: PropTypes.string.isRequired,
+    formType: PropTypes.string.isRequired,
     itemID: PropTypes.string.isRequired,
     changeFocus: PropTypes.func.isRequired,
     changeValue: PropTypes.func.isRequired,

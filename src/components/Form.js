@@ -11,11 +11,12 @@ class Form extends Component {
             let objectLabel = this.props.formLabels[i];
             let objectID = this.props.formIDs[i];
             inputElements.push(<InputItem key={objectKey}
-                itemKey={objectKey}
-                itemID={objectID}
-                changeFocus={this.props.changeFocus}
-                changeValue={this.props.changeValue}
-                itemLabel={objectLabel}/>)
+                                          itemKey={objectKey}
+                                          formType={this.props.formType}
+                                          itemID={objectID}
+                                          changeFocus={this.props.changeFocus}
+                                          changeValue={this.props.changeValue}
+                                          itemLabel={objectLabel}/>)
         }
 
         let removeBtn;
