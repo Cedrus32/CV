@@ -34,6 +34,7 @@ class App extends Component {
 
         this.componentDidMount = this.componentDidMount.bind(this);
         this.addForm = this.addForm.bind(this);
+        this.removeForm = this.removeForm.bind(this);
     }
 
     componentDidMount() {
@@ -50,8 +51,6 @@ class App extends Component {
         let formMeta = this.meta[formType];
         let formKey = uniqid();
         let formItems = [];
-        console.log(formType);
-        console.log(formMeta);
         for (let i = 0; i < formMeta.ids.length; i++) {
             let itemKey = `${formKey}-${i}`;
             formItems.push({itemKey: itemKey, itemValue: ''});
@@ -62,6 +61,14 @@ class App extends Component {
             this.setState({workForms: [...this.state.workForms, {formKey: formKey, formItems: formItems}]});
         } else if (formType === 'e') {
             this.setState({educationForms: [...this.state.educationForms, {formKey: formKey, formItems: formItems}]});
+        }
+    }
+    removeForm(e) {
+        let formType = e.target.dataset.formType;
+        if (formType === 'w') {
+            this.setState({workForms: this.state.workForms.filter(form => form.formKey !== e.target.dataset.formKey)});
+        } else if (formType === 'e') {
+            this.setState({educationForms: this.state.educationForms.filter(form => form.formKey !== e.target.dataset.formKey)});
         }
     }
     

@@ -20,7 +20,7 @@ class Form extends Component {
 
         let removeBtn;
         if (this.props.formType !== 'p') {
-            removeBtn = <Button formKey={this.props.formKey} handleClick={this.props.removeForm} buttonContent='Remove'/>
+            removeBtn = <Button formKey={this.props.formKey} formType={this.props.formType} handleClick={this.props.removeForm} buttonContent='Remove'/>
         }
 
         return (

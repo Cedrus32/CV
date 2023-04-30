@@ -12,13 +12,8 @@ class FormSection extends Component {
             targetItemIndex: null,
         }
 
-        this.removeForm = this.removeForm.bind(this);
         this.changeFocus = this.changeFocus.bind(this);
         this.changeValue = this.changeValue.bind(this);
-    }
-    
-    removeForm(e) {
-        this.setState({forms: this.state.forms.filter(form => form.formKey !== e.target.dataset.formKey)});
     }
 
     changeFocus(e) {
