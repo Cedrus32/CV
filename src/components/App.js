@@ -55,7 +55,7 @@ class App extends Component {
         let formItems = [];
         for (let i = 0; i < formMeta.ids.length; i++) {
             let itemKey = `${formKey}-${i}`;
-            formItems.push({itemKey: itemKey, itemValue: ''});
+            formItems.push({itemKey: itemKey, itemID: formMeta.ids[i], itemValue: ''});
         }
         if (formType === 'p') {
             this.setState({personalForms: [...this.state.personalForms, {formKey: formKey, formItems: formItems}]});
