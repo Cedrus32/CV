@@ -15,7 +15,7 @@ class Header extends Component {
 
     render() {
         let displayValues = {name: null, website: null, location: null, phone: null, email: null, objective: null};
-        if (this.state.mounted === true) {
+        if (this.state.mounted) {
             for (let i = 0; i < this.props.displayContent['0'].formItems.length; i++) {
                 displayValues[this.props.displayContent['0'].formItems[i].itemID] = this.props.displayContent['0'].formItems[i].itemValue
             }
