@@ -1,0 +1,53 @@
+/* TYPOGRAPHY */
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 400;
+}
+
+/* COLORS */
+
+:root {
+    --accent: #235DAC;
+    --border-rad: 0.5em;
+}
+
+body {
+    background-color: white;
+    color: black;
+}
+
+#interact,
+#display {
+    border: 3px solid black;
+    border-radius: var(--border-rad);
+}
+
+/* DISPLAY */
+
+#root {
+    display: grid;
+}
+
+/* POSITIONING, SIZING */
+
+body {
+    height: 100vh;
+    width: 100vw;
+    }
+    
+    main {
+        height: 100%;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 'interact display';
+        column-gap: 1em;
+        padding: 1em;
+    }
+    
+        #interact,
+        #display {
+            height: inherit;
+            overflow: auto;
+            padding: 0.5em;
+        }

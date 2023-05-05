@@ -2,8 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './components/App';
 
-import './styles/style.css';
 import './styles/reset.css';
+import './styles/global.css';
+import './styles/forms.css';
+import './styles/display.css';
 
 // manager function here
 const domNode = document.getElementById('root');
