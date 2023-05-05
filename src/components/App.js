@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import uniqid from 'uniqid';
 import FormSection from './FormSection';
-import Header from './Header';
 import DisplaySection from './DisplaySection';
 
 class App extends Component {
@@ -114,7 +113,7 @@ class App extends Component {
                     <FormSection formType='e' meta={this.meta.e} forms={this.state.educationForms} addForm={this.addForm} removeForm={this.removeForm} changeFocus={this.changeFocus} changeValue={this.changeValue}/>
                 </section>
                 <section id='display'>
-                    <Header displayContent={this.state.personalForms}/>
+                    <DisplaySection sectionType='p' displayContent={this.state.personalForms}/>
                     <DisplaySection sectionType='w' displayContent={this.state.workForms}/>
                     <DisplaySection sectionType='e' displayContent={this.state.educationForms}/>
                 </section>
