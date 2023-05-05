@@ -7,11 +7,11 @@ class FormSection extends Component {
     render() {
         let sectionID;
         if (this.props.formType === 'p') {
-            sectionID = 'personal';
+            sectionID = 'personal-form';
         } else if (this.props.formType === 'w') {
-            sectionID = 'work';
+            sectionID = 'work-form';
         } else if (this.props.formType === 'e') {
-            sectionID = 'education';
+            sectionID = 'education-form';
         }
 
         let formElements = [];

@@ -16,6 +16,15 @@ class DisplaySection extends Component {
     }
 
     render() {
+        let sectionID;
+        if (this.props.sectionType === 'p') {
+            sectionID = 'personal-display';
+        } else if (this.props.sectionType === 'w') {
+            sectionID = 'work-display';
+        } else if (this.props.sectionType === 'e') {
+            sectionID = 'education-display';
+        }
+
         let sectionTitle;
         if (this.props.sectionType === 'w' && this.props.displayContent.length > 0) {
             sectionTitle = <h2>Work Experience</h2>;
@@ -31,7 +40,7 @@ class DisplaySection extends Component {
         }
         
         return (
-            <section className={this.props.sectionType}>
+            <section id={sectionID}>
                 {sectionTitle}
                 {displayElements}
             </section>
