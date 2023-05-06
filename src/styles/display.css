@@ -2,10 +2,15 @@
 
 /* DISPLAY */
 
+.p,
+.w,
+.e {
+    display: grid;
+}
+
 /* POSITIONING, SIZING */
 
 .p {
-    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-areas: 'title   title title'
@@ -40,4 +45,32 @@
 
     .p span:nth-child(6) {
         grid-area: obj;
+    }
+
+.w {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: 'title  date'
+                         'place  location'
+                         'points points'
+}
+
+    .w span:nth-child(1) {
+        grid-area: title;
+    }
+
+    .w span:nth-child(2) {
+        grid-area: place;
+    }
+
+    .w span:nth-child(3) {
+        grid-area: location;
+    }
+
+    .w span:nth-child(4) {
+        grid-area: date;
+    }
+
+    .w span:nth-child(5) {
+        grid-area: points;
     }
