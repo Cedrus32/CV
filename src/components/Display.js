@@ -4,6 +4,13 @@ import uniqid from 'uniqid';
 
 class Display extends Component {
     render() {
+        let divClass;
+        if (this.props.displayType === 'p') {
+            divClass = 'header';
+        } else {
+            divClass = 'experience';
+        }
+
         let displayValues = [];
         let dateValues = [];
         if (this.props.displayContent !== undefined) {
@@ -23,7 +30,7 @@ class Display extends Component {
             }
         }
         return (
-            <div className={this.props.displayType}>
+            <div className={divClass}>
                 {displayValues} 
             </div>
         )
