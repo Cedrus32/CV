@@ -4,7 +4,6 @@ import uniqid from 'uniqid';
 
 class Display extends Component {
     render() {
-        // todo display without 'name' 'website' etc. -- just one-by-one in an array
         let displayValues = [];
         if (this.props.displayContent !== undefined) {
             for (let i = 0; i < this.props.displayContent.formItems.length; i++) {
@@ -12,7 +11,7 @@ class Display extends Component {
             }
         }
         return (
-            <div>
+            <div className={this.props.displayType}>
                 {displayValues} 
             </div>
         )
@@ -20,6 +19,7 @@ class Display extends Component {
 }
 
 Display.propTypes = {
+    displayType: PropTypes.string,
     displayContent: PropTypes.object,
 };
 

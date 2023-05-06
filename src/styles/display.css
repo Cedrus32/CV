@@ -4,3 +4,40 @@
 
 /* POSITIONING, SIZING */
 
+.p {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 'title   title title'
+                         'web     web   web'
+                         'address phone email'
+                         'obj     obj   obj';
+}
+
+    .p span {
+        text-align: center;
+    }
+
+    .p span:nth-child(1) {
+        grid-area: title;
+    }
+
+    .p span:nth-child(2) {
+        grid-area: web;
+    }
+
+    .p span:nth-child(3) {
+        grid-area: address;
+    }
+
+    .p span:nth-child(4) {
+        grid-area: phone;
+    }
+
+    .p span:nth-child(5) {
+        grid-area: email;
+    }
+
+    .p span:nth-child(6) {
+        grid-area: obj;
+    }

@@ -35,7 +35,7 @@ class DisplaySection extends Component {
         let displayElements = [];
         if (this.state.mounted) {
             this.props.displayContent.forEach(formContent => {
-                displayElements.push(<Display key={uniqid()} displayContent={formContent}/>);
+                displayElements.push(<Display key={uniqid()} displayType={this.props.sectionType} displayContent={formContent}/>);
             });
         }
         
