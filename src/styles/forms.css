@@ -35,14 +35,14 @@ form {
 
 /* DISPLAY */
 
-form div{
-    display: grid;
-    }
-    
-    section,
-    form {
+section,
+form {
     display: flex;
     flex-flow: column;
+}
+
+    form div{
+        display: grid;
     }
 
 /* POSITIONING, SIZING */
@@ -51,9 +51,9 @@ form div{
     gap: 2em;
 }
 
-    #personal,
-    #work,
-    #education {
+    #personal-form,
+    #work-form,
+    #education-form {
         gap: 1em;
     }
 
