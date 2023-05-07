@@ -11,27 +11,46 @@ class Display extends Component {
             divClass = 'experience';
         }
 
-        let displayValues = [];
-        let dateValues = [];
+        let displayElements = [];
         if (this.props.displayContent !== undefined) {
+            let dateValues = [];
+            let listValues = [];
+            let formItem;
             for (let i = 0; i < this.props.displayContent.formItems.length; i++) {
-                if (this.props.displayContent.formItems[i].itemID.includes('date') && this.props.displayContent.formItems[i].itemValue !== '') {
-                    dateValues.push(this.props.displayContent.formItems[i].itemValue);
-                } else if (!this.props.displayContent.formItems[i].itemID.includes('date')) {
-                    displayValues.push(<span key={uniqid()} id={this.props.displayContent.formItems[i].itemID}>{this.props.displayContent.formItems[i].itemValue}</span>);
+                formItem = this.props.displayContent.formItems[i];
+                // console.log(item.itemID, item.itemValue);
+                if (formItem.itemID.includes('date')) {
+                    if (formItem.itemValue !== '') {
+                        dateValues.push(this.props.displayContent.formItems[i].itemValue);
+                    }
+                } else if ((formItem.itemID === 'responsibilities' || formItem.itemID === 'activities-and-awards')) {
+                    if (formItem.itemValue !== '') {
+                        listValues.push(...formItem.itemValue.split('\n'));
+                    }
+                } else {
+                    console.log('last else...', formItem.itemID);
+                    displayElements.push(<span key={uniqid()} id={formItem.itemID}>{formItem.itemValue}</span>);
                 }
             }
             if (this.props.displayType !== 'p') {
                 if (dateValues.length > 0) {
-                    displayValues.push(<span key={uniqid()} id='date'>{dateValues.join(' - ')}</span>);
-                } else {
-                    displayValues.push(<span key={uniqid()} id='date'>{''}</span>);
+                    displayElements.push(<span key={uniqid()} id='date'>{dateValues.join(' - ')}</span>);
+                } else if (dateValues.length === 0) {
+                    displayElements.push(<span key={uniqid()} id='date'>{''}</span>);
+                }
+                if (listValues.length > 0) {
+                    let listElements = [];
+                    listValues.forEach(listItem => listElements.push(<li key={uniqid()}>{listItem}</li>));
+                    displayElements.push(<ul key={uniqid()}>{listElements}</ul>);
+                } else if (listValues.length === 0) {
+                    displayElements.push(<ul key={uniqid()} id={formItem.itemID}></ul>)
                 }
             }
         }
+
         return (
             <div className={divClass}>
-                {displayValues} 
+                {displayElements} 
             </div>
         )
     }
