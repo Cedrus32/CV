@@ -18,8 +18,10 @@ class Display extends Component {
             let formItem;
             for (let i = 0; i < this.props.displayContent.formItems.length; i++) {
                 formItem = this.props.displayContent.formItems[i];
-                // console.log(item.itemID, item.itemValue);
-                if (formItem.itemID.includes('date')) {
+                if (formItem.itemID === 'objective' && formItem.itemValue !== '') {
+                    displayElements.push(<div key={uniqid()} className='divider'></div>);
+                    displayElements.push(<span key={uniqid()} id={formItem.itemID}>{formItem.itemValue}</span>);
+                } else if (formItem.itemID.includes('date')) {
                     if (formItem.itemValue !== '') {
                         dateValues.push(this.props.displayContent.formItems[i].itemValue);
                     }
@@ -28,7 +30,6 @@ class Display extends Component {
                         listValues.push(...formItem.itemValue.split('\n'));
                     }
                 } else {
-                    console.log('last else...', formItem.itemID);
                     displayElements.push(<span key={uniqid()} id={formItem.itemID}>{formItem.itemValue}</span>);
                 }
             }

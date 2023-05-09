@@ -27,9 +27,9 @@ class DisplaySection extends Component {
 
         let sectionTitle;
         if (this.props.sectionType === 'w' && this.props.displayContent.length > 0) {
-            sectionTitle = <h2>Work Experience</h2>;
+            sectionTitle = <><h2>Work Experience</h2><div className='divider'></div></>;
         } else if (this.props.sectionType === 'e' && this.props.displayContent.length > 0) {
-            sectionTitle = <h2>Education Experience</h2>;
+            sectionTitle = <><h2>Education Experience</h2><div className='divider'></div></>;
         }
 
         let displayElements = [];

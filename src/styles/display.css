@@ -1,5 +1,9 @@
 /* COLORS */
 
+.divider {
+    background-color: black;
+}
+
 /* DISPLAY */
 
 .header,
@@ -9,77 +13,104 @@
 
 /* POSITIONING, SIZING */
 
-.header {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto auto;
-    grid-template-areas: 'title   title title'
-                         'web     web   web'
-                         'address phone email'
-                         'obj     obj   obj';
+#display {
+    gap: 2em;
 }
 
-    .header span {
-        text-align: center;
+    #personal-display,
+    #work-display,
+    #education-display {
+        gap: 1em;
     }
 
-    .header span:nth-child(1) {
-        grid-area: title;
-    }
-
-    .header span:nth-child(2) {
-        grid-area: web;
-    }
-
-    .header span:nth-child(3) {
-        grid-area: address;
-    }
-
-    .header span:nth-child(4) {
-        grid-area: phone;
-    }
-
-    .header span:nth-child(5) {
-        grid-area: email;
-    }
-
-    .header span:nth-child(6) {
-        grid-area: obj;
-    }
-
-.experience {
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto auto;
-    grid-template-areas: 'title  date'
-                         'place  location'
-                         'points points'
-}
-
-    .experience span:nth-child(3),
-    .experience span:nth-child(4) {
-        text-align: end;
-    }
-
-    .experience span:nth-child(1) {
-        grid-area: title;
-    }
-
-    .experience span:nth-child(2) {
-        grid-area: place;
-    }
-
-    .experience span:nth-child(3) {
-        grid-area: location;
-    }
-
-    .experience span:nth-child(4) {
-        grid-area: date;
-    }
-
-    .experience ul:nth-child(5) {
-        grid-area: points;
-    }
-
-        ul {
-            /* color: blue; */
-            margin-left: 2em;
+        .divider {
+            height: 1px;
+            width: 100%;
         }
+
+        .header,
+        .experience,
+        ul {
+            gap: 0.15em;
+        }
+
+        .header {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto auto auto auto;
+            grid-template-areas: 'title   title title'
+                                'web     web     web'
+                                'address phone   email'
+                                'divider divider divider'
+                                'obj     obj     obj';
+        }
+
+            .header span {
+                text-align: center;
+            }
+
+            .header span:nth-child(1) {
+                grid-area: title;
+            }
+
+            .header span:nth-child(2) {
+                grid-area: web;
+            }
+
+            .header span:nth-child(3) {
+                grid-area: address;
+            }
+
+            .header span:nth-child(4) {
+                grid-area: phone;
+            }
+
+            .header span:nth-child(5) {
+                grid-area: email;
+            }
+
+            .header div:nth-child(6) {
+                grid-area: divider;
+                margin: 1em 0em;
+            }
+
+            .header span:nth-child(7) {
+                grid-area: obj;
+                line-height: 1.3em;
+            }
+
+        .experience {
+            grid-template-columns: auto auto;
+            grid-template-rows: auto auto auto;
+            grid-template-areas: 'title  date'
+                                'place  location'
+                                'points points'
+        }
+
+            .experience span:nth-child(3),
+            .experience span:nth-child(4) {
+                text-align: end;
+            }
+
+            .experience span:nth-child(1) {
+                grid-area: title;
+            }
+
+            .experience span:nth-child(2) {
+                grid-area: place;
+            }
+
+            .experience span:nth-child(3) {
+                grid-area: location;
+            }
+
+            .experience span:nth-child(4) {
+                grid-area: date;
+            }
+
+            .experience ul:nth-child(5) {
+                grid-area: points;
+            }
+
+                ul {
+                    margin-left: 2em;
+                }
