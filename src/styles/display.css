@@ -11,7 +11,7 @@
 
 .header {
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
     grid-template-areas: 'title   title title'
                          'web     web   web'
                          'address phone email'
@@ -54,6 +54,11 @@
                          'points points'
 }
 
+    .experience span:nth-child(3),
+    .experience span:nth-child(4) {
+        text-align: end;
+    }
+
     .experience span:nth-child(1) {
         grid-area: title;
     }
@@ -70,6 +75,11 @@
         grid-area: date;
     }
 
-    .experience span:nth-child(5) {
+    .experience ul:nth-child(5) {
         grid-area: points;
     }
+
+        ul {
+            /* color: blue; */
+            margin-left: 2em;
+        }
