@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import uniqid from 'uniqid';
 import FormSection from './FormSectionFunc';
-import DisplaySection from './DisplaySection';
+import DisplaySection from './DisplaySectionFunc';
 
 const App = () => {
     const [pForms, setPForms] = useState([]);
@@ -105,6 +105,9 @@ const App = () => {
                 <FormSection formType='e' meta={meta.e} forms={eForms} addForm={addForm} removeForm={removeForm} changeFocus={changeFocus} changeValue={changeValue}/>
             </section>
             <section id='display'>
+                <DisplaySection sectionType='p' displayContent={pForms}/>
+                <DisplaySection sectionType='w' displayContent={wForms}/>
+                <DisplaySection sectionType='e' displayContent={eForms}/>
             </section>
         </>
     )
