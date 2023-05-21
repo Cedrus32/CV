@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const InputItem = (props) => {
-    let {itemKey, formType, itemID, itemLabel} = props;
+    let {itemKey, formType, itemID, itemLabel, changeFocus, changeValue} = props;
 
     let element;
     let inputType = getType(itemID)
     if (inputType === 'textarea') {
-        element = <textarea key={itemKey} data-input-key={itemKey} data-form-type={formType} id={itemID}></textarea>
+        element = <textarea key={itemKey} data-input-key={itemKey} data-form-type={formType} id={itemID} onFocus={changeFocus} onChange={changeValue}></textarea>
     } else {
-        element = <input key={itemKey} data-input-key={itemKey} data-form-type={formType} type={inputType} id={itemID}></input>
+        element = <input key={itemKey} data-input-key={itemKey} data-form-type={formType} type={inputType} id={itemID} onFocus={changeFocus} onChange={changeValue}></input>
     }
 
     function getType(id) {
@@ -40,6 +40,8 @@ InputItem.propTypes = {
     formType: PropTypes.string.isRequired,
     itemID: PropTypes.string.isRequired,
     itemLabel: PropTypes.string.isRequired,
+    changeFocus: PropTypes.func.isRequired,
+    changeValue: PropTypes.func.isRequired,
 }
 
 export default InputItem;

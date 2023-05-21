@@ -4,13 +4,13 @@ import Form from './FormFunc';
 import Button from './ButtonFunc';
 
 const FormSection = (props) => {
-    // let {formType, meta, forms, addForm} = props;
     let formType = props.formType;
     let meta = props.meta;
     let forms = props.forms;
     let addForm = props.addForm;
     let removeForm = props.removeForm;
-    console.log(formType, meta, forms);
+    let changeFocus = props.changeFocus;
+    let changeValue = props.changeValue;
 
     let sectionID;
     if (formType === 'p') {
@@ -23,7 +23,7 @@ const FormSection = (props) => {
 
     let formElements = [];
     forms.forEach(object => {
-        formElements.push(<Form key={object.formKey} formKey={object.formKey} formType={formType} formLabels={meta.labels} formIDs={meta.ids} removeForm={removeForm}/>);
+        formElements.push(<Form key={object.formKey} formKey={object.formKey} formType={formType} formLabels={meta.labels} formIDs={meta.ids} removeForm={removeForm} changeFocus={changeFocus} changeValue={changeValue}/>);
     });
 
     let addBtn;
@@ -45,6 +45,8 @@ FormSection.propTypes = {
     forms: PropTypes.array.isRequired,
     addForm: PropTypes.func,
     removeForm: PropTypes.func,
+    changeFocus: PropTypes.func.isRequired,
+    changeValue: PropTypes.func.isRequired,
 }
 
 export default FormSection;

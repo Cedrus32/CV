@@ -9,14 +9,15 @@ const Form = (props) => {
     let formLabels = props.formLabels;
     let formIDs = props.formIDs;
     let removeForm = props.removeForm;
-    console.log(formKey, formType, formLabels, formIDs);
-    
+    let changeFocus = props.changeFocus;
+    let changeValue = props.changeValue;
+ 
     let inputElements = [];
     for (let i = 0; i < formIDs.length; i++) {
         let objectKey = `${formKey}-${i}`;
         let objectLabel = formLabels[i];
         let objectID = formIDs[i];
-        inputElements.push(<InputItem key={objectKey} itemKey={objectKey} formType={formType} itemID={objectID} itemLabel={objectLabel}/>);
+        inputElements.push(<InputItem key={objectKey} itemKey={objectKey} formType={formType} itemID={objectID} itemLabel={objectLabel} changeFocus={changeFocus} changeValue={changeValue}/>);
     }
 
     let removeBtn;
@@ -37,6 +38,8 @@ Form.propTypes = {
     formLabels: PropTypes.array.isRequired,
     formIDs: PropTypes.array.isRequired,
     removeForm: PropTypes.func,
+    changeFocus: PropTypes.func.isRequired,
+    changeValue: PropTypes.func.isRequired,
 }
 
 export default Form;
