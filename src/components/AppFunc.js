@@ -30,6 +30,9 @@ const App = () => {
 
     // addForm
     function addForm(e) {
+        console.log('ADD FORM');
+        console.log(e);
+
         let formType;
         if (e !== undefined) {
             formType = e.target.dataset.formType
@@ -48,9 +51,12 @@ const App = () => {
         // console.log(formItems);
         if (formType === 'p') {
             setPForms([...pForms, {formKey: formKey, formItems: formItems}]);
+        } else if (formType ==='w') {
+            setWForms([...wForms, {formKey: formKey, formItems: formItems}]);
+        } else if (formType === 'e') {
+            setEForms([...eForms, {formKey: formKey, formItems: formItems}]);
         }
     }
-
     // removeForm
     // changeFocus
     // changeValue
@@ -59,8 +65,8 @@ const App = () => {
         <>
             <section id='interact'>
                 <FormSection formType='p' meta={meta.p} forms={pForms}/>
-                <FormSection formType='w' meta={meta.w} forms={wForms}/>
-                <FormSection formType='e' meta={meta.e} forms={eForms}/>
+                <FormSection formType='w' meta={meta.w} forms={wForms} addForm={addForm}/>
+                <FormSection formType='e' meta={meta.e} forms={eForms} addForm={addForm}/>
             </section>
             <section id='display'></section>
         </>

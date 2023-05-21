@@ -6,9 +6,10 @@ const Button = (props) => {
     let formKey = props.formKey;
     let className = props.className;
     let buttonContent = props.buttonContent;
+    let handleClick = props.handleClick;
 
     return (
-        <button type='button' data-form-type={formType} data-form-key={formKey} className={className}>{buttonContent}</button>
+        <button type='button' data-form-type={formType} data-form-key={formKey} className={className} onClick={handleClick}>{buttonContent}</button>
     )
 }
 Button.propTypes = {
@@ -16,6 +17,7 @@ Button.propTypes = {
     formKey: PropTypes.string,
     className: PropTypes.string,
     buttonContent: PropTypes.string.isRequired,
+    handleClick: PropTypes.func.isRequired,
 }
 
 export default Button;
