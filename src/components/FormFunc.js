@@ -4,8 +4,13 @@ import InputItem from './InputItemFunc';
 import Button from './ButtonFunc';
 
 const Form = (props) => {
-    let {formKey, formType, formLabels, formIDs} = props;
+    let formKey = props.formKey;
+    let formType = props.formType;
+    let formLabels = props.formLabels;
+    let formIDs = props.formIDs;
+    let removeForm = props.removeForm;
     console.log(formKey, formType, formLabels, formIDs);
+    
     let inputElements = [];
     for (let i = 0; i < formIDs.length; i++) {
         let objectKey = `${formKey}-${i}`;
@@ -16,7 +21,7 @@ const Form = (props) => {
 
     let removeBtn;
     if (formType !== 'p') {
-        removeBtn = <Button formKey={formKey} formType={formType} className='remove' buttonContent='Remove'/>
+        removeBtn = <Button formKey={formKey} formType={formType} className='remove' buttonContent='Remove' handleClick={removeForm}/>
     }
 
     return (
@@ -31,6 +36,7 @@ Form.propTypes = {
     formType: PropTypes.string.isRequired,
     formLabels: PropTypes.array.isRequired,
     formIDs: PropTypes.array.isRequired,
+    removeForm: PropTypes.func,
 }
 
 export default Form;

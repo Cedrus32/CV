@@ -58,6 +58,14 @@ const App = () => {
         }
     }
     // removeForm
+    function removeForm(e) {
+        let formType = e.target.dataset.formType;
+        if (formType === 'w') {
+            setWForms(wForms.filter(form => form.formKey !== e.target.dataset.formKey));
+        } else if (formType === 'e') {
+            setEForms(eForms.filter(form => form.formKey !== e.target.dataset.formKey));
+        }
+    }
     // changeFocus
     // changeValue
     
@@ -65,8 +73,8 @@ const App = () => {
         <>
             <section id='interact'>
                 <FormSection formType='p' meta={meta.p} forms={pForms}/>
-                <FormSection formType='w' meta={meta.w} forms={wForms} addForm={addForm}/>
-                <FormSection formType='e' meta={meta.e} forms={eForms} addForm={addForm}/>
+                <FormSection formType='w' meta={meta.w} forms={wForms} addForm={addForm} removeForm={removeForm}/>
+                <FormSection formType='e' meta={meta.e} forms={eForms} addForm={addForm} removeForm={removeForm}/>
             </section>
             <section id='display'></section>
         </>

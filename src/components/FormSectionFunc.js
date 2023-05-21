@@ -9,6 +9,7 @@ const FormSection = (props) => {
     let meta = props.meta;
     let forms = props.forms;
     let addForm = props.addForm;
+    let removeForm = props.removeForm;
     console.log(formType, meta, forms);
 
     let sectionID;
@@ -22,7 +23,7 @@ const FormSection = (props) => {
 
     let formElements = [];
     forms.forEach(object => {
-        formElements.push(<Form key={object.formKey} formKey={object.formKey} formType={formType} formLabels={meta.labels} formIDs={meta.ids}/>);
+        formElements.push(<Form key={object.formKey} formKey={object.formKey} formType={formType} formLabels={meta.labels} formIDs={meta.ids} removeForm={removeForm}/>);
     });
 
     let addBtn;
@@ -43,6 +44,7 @@ FormSection.propTypes = {
     meta: PropTypes.object.isRequired,
     forms: PropTypes.array.isRequired,
     addForm: PropTypes.func,
+    removeForm: PropTypes.func,
 }
 
 export default FormSection;
