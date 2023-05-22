@@ -1,30 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Field from './Field';
 import Button from './Button';
 
-class Form extends Component {
-    render() {
-        let inputElements = [];
-        for (let i = 0; i < this.props.formIDs.length; i++) {
-            let objectKey = `${this.props.formKey}-${i}`;
-            let objectLabel = this.props.formLabels[i];
-            let objectID = this.props.formIDs[i];
-            inputElements.push(<Field key={objectKey} itemKey={objectKey} formType={this.props.formType} itemID={objectID} changeFocus={this.props.changeFocus} changeValue={this.props.changeValue} itemLabel={objectLabel}/>)
-        }
-
-        let removeBtn;
-        if (this.props.formType !== 'p') {
-            removeBtn = <Button formKey={this.props.formKey} formType={this.props.formType} handleClick={this.props.removeForm} buttonContent='Remove'/>
-        }
-
-        return (
-            <form key={this.props.formKey}>
-                {inputElements}
-                {removeBtn}
-            </form>
-        )
+const Form = (props) => {
+    let formKey = props.formKey;
+    let formType = props.formType;
+    let formLabels = props.formLabels;
+    let formIDs = props.formIDs;
+    let removeForm = props.removeForm;
+    let changeFocus = props.changeFocus;
+    let changeValue = props.changeValue;
+ 
+    let inputElements = [];
+    for (let i = 0; i < formIDs.length; i++) {
+        let objectKey = `${formKey}-${i}`;
+        let objectLabel = formLabels[i];
+        let objectID = formIDs[i];
+        inputElements.push(<Field key={objectKey} itemKey={objectKey} formType={formType} itemID={objectID} itemLabel={objectLabel} changeFocus={changeFocus} changeValue={changeValue}/>);
     }
+
+    let removeBtn;
+    if (formType !== 'p') {
+        removeBtn = <Button formKey={formKey} formType={formType} className='remove' buttonContent='Remove' handleClick={removeForm}/>
+    }
+
+    return (
+        <form key={formKey}>
+            {inputElements}
+            {removeBtn}
+        </form>
+    )
 }
 Form.propTypes = {
     formKey: PropTypes.string.isRequired,

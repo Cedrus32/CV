@@ -1,125 +1,119 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import uniqid from 'uniqid';
 import FormSection from './FormSection';
 import DisplaySection from './DisplaySection';
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            personalForms: [],
-            workForms: [],
-            educationForms: [],
-            targetFormIndex: null,
-            targetItemIndex: null,
+const App = () => {
+    const [pForms, setPForms] = useState([]);
+    const [wForms, setWForms] = useState([]);
+    const [eForms, setEForms] = useState([]);
+    const [targetFormIndex, setTFI] = useState(null);
+    const [targetItemIndex, setTII] = useState(null);
+
+    const meta = {
+        p: {
+            title: 'Personal Details',
+            labels: ['Name', 'Website', 'Location', 'Phone', 'Email', 'Objective for Applying'],
+            ids: ['name', 'website', 'location', 'phone', 'email', 'objective']
+        },
+        w: {
+            title: 'Work Experience',
+            labels: ['Position', 'Company', 'Location', 'Start', 'End', 'Responsibilities'],
+            ids: ['position', 'company', 'location', 'start-date', 'end-date', 'responsibilities']
+        },
+        e: {
+            title: 'Education',
+            labels: ['Field of Study', 'Institution', 'Location', 'Graduated', 'Activities and Awards'],
+            ids: ['field-of-study', 'institution', 'location', 'graduated-date', 'activities-and-awards']
         }
-        this.meta = {
-            p: {
-                title: 'Personal Details',
-                labels: ['Name', 'Website', 'Location', 'Phone', 'Email', 'Objective for Applying'],
-                ids: ['name', 'website', 'location', 'phone', 'email', 'objective']
-            },
-            w: {
-                title: 'Work Experience',
-                labels: ['Position', 'Company', 'Location', 'Start', 'End', 'Responsibilities'],
-                ids: ['position', 'company', 'location', 'start-date', 'end-date', 'responsibilities']
-            },
-            e: {
-                title: 'Education',
-                labels: ['Field of Study', 'Institution', 'Location', 'Graduated', 'Activities and Awards'],
-                ids: ['field-of-study', 'institution', 'location', 'graduated-date', 'activities-and-awards']
-            }
-        }
+    };
 
-        this.componentDidMount = this.componentDidMount.bind(this);
-        this.addForm = this.addForm.bind(this);
-        this.removeForm = this.removeForm.bind(this);
-        this.changeFocus = this.changeFocus.bind(this);
-        this.changeValue = this.changeValue.bind(this);
-    }
+    // componentDidMount
+    useEffect(() => {addForm()}, []);
 
-    componentDidMount() {
-        this.addForm();
-    }
+    function addForm(e) {
+        // console.log('ADD FORM');
+        // console.log(e);
 
-    addForm(e) {
         let formType;
         if (e !== undefined) {
-            formType = e.target.dataset.formType;
+            formType = e.target.dataset.formType
         } else {
-            formType = 'p'
+            formType = 'p';
         }
-        let formMeta = this.meta[formType];
+        let formMeta = meta[formType];
         let formKey = uniqid();
         let formItems = [];
         for (let i = 0; i < formMeta.ids.length; i++) {
             let itemKey = `${formKey}-${i}`;
             formItems.push({itemKey: itemKey, itemID: formMeta.ids[i], itemValue: ''});
         }
+
         if (formType === 'p') {
-            this.setState({personalForms: [...this.state.personalForms, {formKey: formKey, formItems: formItems}]});
-        } else if (formType === 'w') {
-            this.setState({workForms: [...this.state.workForms, {formKey: formKey, formItems: formItems}]});
+            setPForms([...pForms, {formKey: formKey, formItems: formItems}]);
+        } else if (formType ==='w') {
+            setWForms([...wForms, {formKey: formKey, formItems: formItems}]);
         } else if (formType === 'e') {
-            this.setState({educationForms: [...this.state.educationForms, {formKey: formKey, formItems: formItems}]});
+            setEForms([...eForms, {formKey: formKey, formItems: formItems}]);
         }
     }
-    removeForm(e) {
+    function removeForm(e) {
         let formType = e.target.dataset.formType;
         if (formType === 'w') {
-            this.setState({workForms: this.state.workForms.filter(form => form.formKey !== e.target.dataset.formKey)});
+            setWForms(wForms.filter(form => form.formKey !== e.target.dataset.formKey));
         } else if (formType === 'e') {
-            this.setState({educationForms: this.state.educationForms.filter(form => form.formKey !== e.target.dataset.formKey)});
+            setEForms(eForms.filter(form => form.formKey !== e.target.dataset.formKey));
         }
     }
 
-    changeFocus(e) {
+    function changeFocus(e) {
+        // console.log('change focus');
         let formType = e.target.dataset.formType;
         if (formType === 'p') {
-            this.setState({targetFormIndex: this.state.personalForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0])});
+            setTFI(pForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
         } else if (formType === 'w') {
-            this.setState({targetFormIndex: this.state.workForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0])});
+            setTFI(wForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
         } else if (formType === 'e') {
-            this.setState({targetFormIndex: this.state.educationForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0])});
+            setTFI(eForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
         }
-        this.setState({targetItemIndex: parseInt(e.target.dataset.inputKey.split('-')[1])});
+        setTII(parseInt(e.target.dataset.inputKey.split('-')[1]));
     }
-    changeValue(e) {
+    function changeValue(e) {
+        // console.log('value change');
         let formType = e.target.dataset.formType;
         let formsCopy;
         if (formType === 'p') {
-            formsCopy = this.state.personalForms;
+            formsCopy = pForms;
         } else if (formType === 'w') {
-            formsCopy = this.state.workForms;
+            formsCopy = wForms;
         } else if (formType === 'e') {
-            formsCopy = this.state.educationForms;
+            formsCopy = eForms;
         }
-        formsCopy[this.state.targetFormIndex].formItems[this.state.targetItemIndex].itemValue = e.target.value;
+        formsCopy[targetFormIndex].formItems[targetItemIndex].itemValue = e.target.value;
+        // console.log(formsCopy[targetFormIndex].formItems[targetItemIndex].itemValue)
         if (formType === 'p') {
-            this.setState({personalForms: formsCopy});
+            setPForms(formsCopy);
         } else if (formType === 'w') {
-            this.setState({workForms: formsCopy});
+            setWForms(formsCopy);
         } else if (formType === 'e') {
-            this.setState({educationForms: formsCopy});
+            setEForms(formsCopy);
         }
     }
-    
-    render() {
-        return (
-            <>
-                <section id='interact'>
-                    <FormSection formType='p' meta={this.meta.p} forms={this.state.personalForms} didMount={this.componentDidMount} changeFocus={this.changeFocus} changeValue={this.changeValue}/>
-                    <FormSection formType='w' meta={this.meta.w} forms={this.state.workForms} addForm={this.addForm} removeForm={this.removeForm} changeFocus={this.changeFocus} changeValue={this.changeValue}/>
-                    <FormSection formType='e' meta={this.meta.e} forms={this.state.educationForms} addForm={this.addForm} removeForm={this.removeForm} changeFocus={this.changeFocus} changeValue={this.changeValue}/>
-                </section>
-                <section id='display'>
-                    <DisplaySection sectionType='p' displayContent={this.state.personalForms}/>
-                    <DisplaySection sectionType='w' displayContent={this.state.workForms}/>
-                    <DisplaySection sectionType='e' displayContent={this.state.educationForms}/>
-                </section>
-            </>
-        )
-    }
+
+    return (
+        <>
+            <section id='interact'>
+                <FormSection formType='p' meta={meta.p} forms={pForms} changeFocus={changeFocus} changeValue={changeValue}/>
+                <FormSection formType='w' meta={meta.w} forms={wForms} addForm={addForm} removeForm={removeForm} changeFocus={changeFocus} changeValue={changeValue}/>
+                <FormSection formType='e' meta={meta.e} forms={eForms} addForm={addForm} removeForm={removeForm} changeFocus={changeFocus} changeValue={changeValue}/>
+            </section>
+            <section id='display'>
+                <DisplaySection sectionType='p' displayContent={pForms}/>
+                <DisplaySection sectionType='w' displayContent={wForms}/>
+                <DisplaySection sectionType='e' displayContent={eForms}/>
+            </section>
+        </>
+    )
 }
 
 export default App;
