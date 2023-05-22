@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class InputItem extends Component {
+class Field extends Component {
     getType(id) {
         if (id === 'website') {
             return 'url';
@@ -36,7 +36,7 @@ class InputItem extends Component {
     }
 
 }
-InputItem.propTypes = {
+Field.propTypes = {
     itemKey: PropTypes.string.isRequired,
     formType: PropTypes.string.isRequired,
     itemID: PropTypes.string.isRequired,
@@ -45,4 +45,4 @@ InputItem.propTypes = {
     itemLabel: PropTypes.string.isRequired,
 }
 
-export default InputItem;
+export default Field;

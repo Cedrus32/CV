@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputItem from './InputItemFunc';
+import Field from './FieldFunc';
 import Button from './ButtonFunc';
 
 const Form = (props) => {
@@ -17,7 +17,7 @@ const Form = (props) => {
         let objectKey = `${formKey}-${i}`;
         let objectLabel = formLabels[i];
         let objectID = formIDs[i];
-        inputElements.push(<InputItem key={objectKey} itemKey={objectKey} formType={formType} itemID={objectID} itemLabel={objectLabel} changeFocus={changeFocus} changeValue={changeValue}/>);
+        inputElements.push(<Field key={objectKey} itemKey={objectKey} formType={formType} itemID={objectID} itemLabel={objectLabel} changeFocus={changeFocus} changeValue={changeValue}/>);
     }
 
     let removeBtn;

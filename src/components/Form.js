@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import InputItem from './InputItem';
+import Field from './Field';
 import Button from './Button';
 
 class Form extends Component {
@@ -10,7 +10,7 @@ class Form extends Component {
             let objectKey = `${this.props.formKey}-${i}`;
             let objectLabel = this.props.formLabels[i];
             let objectID = this.props.formIDs[i];
-            inputElements.push(<InputItem key={objectKey} itemKey={objectKey} formType={this.props.formType} itemID={objectID} changeFocus={this.props.changeFocus} changeValue={this.props.changeValue} itemLabel={objectLabel}/>)
+            inputElements.push(<Field key={objectKey} itemKey={objectKey} formType={this.props.formType} itemID={objectID} changeFocus={this.props.changeFocus} changeValue={this.props.changeValue} itemLabel={objectLabel}/>)
         }
 
         let removeBtn;

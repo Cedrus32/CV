@@ -32,8 +32,8 @@ const App = () => {
     useEffect(() => {addForm()}, []);
 
     function addForm(e) {
-        console.log('ADD FORM');
-        console.log(e);
+        // console.log('ADD FORM');
+        // console.log(e);
 
         let formType;
         if (e !== undefined) {
@@ -67,6 +67,7 @@ const App = () => {
     }
 
     function changeFocus(e) {
+        // console.log('change focus');
         let formType = e.target.dataset.formType;
         if (formType === 'p') {
             setTFI(pForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
@@ -78,6 +79,7 @@ const App = () => {
         setTII(parseInt(e.target.dataset.inputKey.split('-')[1]));
     }
     function changeValue(e) {
+        // console.log('value change');
         let formType = e.target.dataset.formType;
         let formsCopy;
         if (formType === 'p') {
@@ -88,6 +90,7 @@ const App = () => {
             formsCopy = eForms;
         }
         formsCopy[targetFormIndex].formItems[targetItemIndex].itemValue = e.target.value;
+        // console.log(formsCopy[targetFormIndex].formItems[targetItemIndex].itemValue)
         if (formType === 'p') {
             setPForms(formsCopy);
         } else if (formType === 'w') {

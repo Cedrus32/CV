@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputItem = (props) => {
+const Field = (props) => {
     let {itemKey, formType, itemID, itemLabel, changeFocus, changeValue} = props;
 
     let element;
@@ -35,7 +35,7 @@ const InputItem = (props) => {
         </div>
     )
 }
-InputItem.propTypes = {
+Field.propTypes = {
     itemKey: PropTypes.string.isRequired,
     formType: PropTypes.string.isRequired,
     itemID: PropTypes.string.isRequired,
@@ -44,4 +44,4 @@ InputItem.propTypes = {
     changeValue: PropTypes.func.isRequired,
 }
 
-export default InputItem;
+export default Field;
