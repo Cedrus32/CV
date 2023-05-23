@@ -7,8 +7,8 @@ const App = () => {
     const [pForms, setPForms] = useState([]);
     const [wForms, setWForms] = useState([]);
     const [eForms, setEForms] = useState([]);
-    const [targetFormIndex, setTFI] = useState(null);
-    const [targetItemIndex, setTII] = useState(null);
+    const [targetFormIndex, setTForm] = useState(null);
+    const [targetFieldIndex, setTField] = useState(null);
 
     const meta = {
         p: {
@@ -66,37 +66,33 @@ const App = () => {
         }
     }
 
+    // !! only updates value when TForm/TField is updated in state
     function changeFocus(e) {
-        // console.log('change focus');
-        // let formType = e.target.dataset.formType;
-        // if (formType === 'p') {
-        //     setTFI(pForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
-        // } else if (formType === 'w') {
-        //     setTFI(wForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
-        // } else if (formType === 'e') {
-        //     setTFI(eForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
-        // }
-        // setTII(parseInt(e.target.dataset.inputKey.split('-')[1]));
+        console.log('change focus');
+        let formType = e.target.dataset.formType;
+        if (formType === 'p') {
+            setTForm(pForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
+        } else if (formType === 'w') {
+            setTForm(wForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
+        } else if (formType === 'e') {
+            setTForm(eForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
+        }
+        setTField(parseInt(e.target.dataset.inputKey.split('-')[1]));
     }
     function changeValue(e) {
+        // console.log('value change');
+        // console.log(targetFormIndex, targetFieldIndex);
         let formType = e.target.dataset.formType;
-        let fieldIndex = parseInt(e.target.dataset.inputKey.split('-')[1]);
-        let formIndex;
         let formsCopy;
         if (formType === 'p') {
-            formIndex = pForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]);
             formsCopy = pForms;
         } else if (formType === 'w') {
-            formIndex = wForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split(('-')[0]));
             formsCopy = wForms;
         } else if (formType === 'e') {
-            formIndex = eForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split(('-')[0]));
             formsCopy = eForms;
         }
-        console.log('formType:', formType, 'formIndex:', formIndex, 'fieldIndex:', fieldIndex);
-        formsCopy[formIndex].fields[fieldIndex].itemValue = e.target.value;
-        console.log(formsCopy);
-        // console.log(formsCopy[formIndex].fields[fieldIndex].itemValue);
+        formsCopy[targetFormIndex].fields[targetFieldIndex].itemValue = e.target.value;
+        // console.log(formsCopy[targetFormIndex].fields[targetFieldIndex].itemValue)
         if (formType === 'p') {
             setPForms(formsCopy);
         } else if (formType === 'w') {
@@ -104,26 +100,6 @@ const App = () => {
         } else if (formType === 'e') {
             setEForms(formsCopy);
         }
-
-        // // console.log('value change');
-        // let formType = e.target.dataset.formType;
-        // let formsCopy;
-        // if (formType === 'p') {
-        //     formsCopy = pForms;
-        // } else if (formType === 'w') {
-        //     formsCopy = wForms;
-        // } else if (formType === 'e') {
-        //     formsCopy = eForms;
-        // }
-        // formsCopy[targetFormIndex].fields[targetItemIndex].itemValue = e.target.value;
-        // // console.log(formsCopy[targetFormIndex].fields[targetItemIndex].itemValue)
-        // if (formType === 'p') {
-        //     setPForms(formsCopy);
-        // } else if (formType === 'w') {
-        //     setWForms(formsCopy);
-        // } else if (formType === 'e') {
-        //     setEForms(formsCopy);
-        // }
     }
 
     return (
