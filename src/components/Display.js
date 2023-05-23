@@ -18,14 +18,14 @@ const Display = (props) => {
         let dateValues = [];
         let listValues = [];
         let formItem;
-        for (let i = 0; i < displayContent.formItems.length; i++) {
-            formItem = displayContent.formItems[i];
+        for (let i = 0; i < displayContent.fields.length; i++) {
+            formItem = displayContent.fields[i];
             if (formItem.itemID === 'objective' && formItem.itemValue !== '') {
                 displayElements.push(<div key={uniqid()} className='divider'></div>);
                 displayElements.push(<span key={uniqid()} id={formItem.itemID}>{formItem.itemValue}</span>);
             } else if (formItem.itemID.includes('date')) {
                 if (formItem.itemValue !== '') {
-                    dateValues.push(displayContent.formItems[i].itemValue);
+                    dateValues.push(displayContent.fields[i].itemValue);
                 }
             } else if ((formItem.itemID === 'responsibilities' || formItem.itemID === 'activities-and-awards')) {
                 if (formItem.itemValue !== '') {

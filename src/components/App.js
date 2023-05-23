@@ -43,18 +43,18 @@ const App = () => {
         }
         let formMeta = meta[formType];
         let formKey = uniqid();
-        let formItems = [];
+        let fields = [];
         for (let i = 0; i < formMeta.ids.length; i++) {
             let itemKey = `${formKey}-${i}`;
-            formItems.push({itemKey: itemKey, itemID: formMeta.ids[i], itemValue: ''});
+            fields.push({itemKey: itemKey, itemID: formMeta.ids[i], itemValue: ''});
         }
 
         if (formType === 'p') {
-            setPForms([...pForms, {formKey: formKey, formItems: formItems}]);
+            setPForms([...pForms, {formKey: formKey, fields: fields}]);
         } else if (formType ==='w') {
-            setWForms([...wForms, {formKey: formKey, formItems: formItems}]);
+            setWForms([...wForms, {formKey: formKey, fields: fields}]);
         } else if (formType === 'e') {
-            setEForms([...eForms, {formKey: formKey, formItems: formItems}]);
+            setEForms([...eForms, {formKey: formKey, fields: fields}]);
         }
     }
     function removeForm(e) {
@@ -68,29 +68,35 @@ const App = () => {
 
     function changeFocus(e) {
         // console.log('change focus');
-        let formType = e.target.dataset.formType;
-        if (formType === 'p') {
-            setTFI(pForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
-        } else if (formType === 'w') {
-            setTFI(wForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
-        } else if (formType === 'e') {
-            setTFI(eForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
-        }
-        setTII(parseInt(e.target.dataset.inputKey.split('-')[1]));
+        // let formType = e.target.dataset.formType;
+        // if (formType === 'p') {
+        //     setTFI(pForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
+        // } else if (formType === 'w') {
+        //     setTFI(wForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
+        // } else if (formType === 'e') {
+        //     setTFI(eForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
+        // }
+        // setTII(parseInt(e.target.dataset.inputKey.split('-')[1]));
     }
     function changeValue(e) {
-        // console.log('value change');
         let formType = e.target.dataset.formType;
+        let fieldIndex = parseInt(e.target.dataset.inputKey.split('-')[1]);
+        let formIndex;
         let formsCopy;
         if (formType === 'p') {
+            formIndex = pForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]);
             formsCopy = pForms;
         } else if (formType === 'w') {
+            formIndex = wForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split(('-')[0]));
             formsCopy = wForms;
         } else if (formType === 'e') {
+            formIndex = eForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split(('-')[0]));
             formsCopy = eForms;
         }
-        formsCopy[targetFormIndex].formItems[targetItemIndex].itemValue = e.target.value;
-        // console.log(formsCopy[targetFormIndex].formItems[targetItemIndex].itemValue)
+        console.log('formType:', formType, 'formIndex:', formIndex, 'fieldIndex:', fieldIndex);
+        formsCopy[formIndex].fields[fieldIndex].itemValue = e.target.value;
+        console.log(formsCopy);
+        // console.log(formsCopy[formIndex].fields[fieldIndex].itemValue);
         if (formType === 'p') {
             setPForms(formsCopy);
         } else if (formType === 'w') {
@@ -98,6 +104,26 @@ const App = () => {
         } else if (formType === 'e') {
             setEForms(formsCopy);
         }
+
+        // // console.log('value change');
+        // let formType = e.target.dataset.formType;
+        // let formsCopy;
+        // if (formType === 'p') {
+        //     formsCopy = pForms;
+        // } else if (formType === 'w') {
+        //     formsCopy = wForms;
+        // } else if (formType === 'e') {
+        //     formsCopy = eForms;
+        // }
+        // formsCopy[targetFormIndex].fields[targetItemIndex].itemValue = e.target.value;
+        // // console.log(formsCopy[targetFormIndex].fields[targetItemIndex].itemValue)
+        // if (formType === 'p') {
+        //     setPForms(formsCopy);
+        // } else if (formType === 'w') {
+        //     setWForms(formsCopy);
+        // } else if (formType === 'e') {
+        //     setEForms(formsCopy);
+        // }
     }
 
     return (
