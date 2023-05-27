@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './components/App';
 
@@ -7,7 +7,9 @@ import './styles/global.css';
 import './styles/forms.css';
 import './styles/display.css';
 
-// manager function here
-const domNode = document.getElementById('root');
-const root = createRoot(domNode);
-root.render(<App />);
+const root = createRoot(document.getElementById('root'));
+root.render(
+    <StrictMode>
+        <App />
+    </StrictMode>
+);
