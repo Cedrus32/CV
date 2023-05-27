@@ -9,7 +9,6 @@ const FormSection = (props) => {
     let forms = props.forms;
     let addForm = props.addForm;
     let removeForm = props.removeForm;
-    let changeFocus = props.changeFocus;
     let changeValue = props.changeValue;
 
     let sectionID;
@@ -22,8 +21,8 @@ const FormSection = (props) => {
     }
 
     let formElements = [];
-    forms.forEach(object => {
-        formElements.push(<Form key={object.formKey} formKey={object.formKey} formType={formType} formLabels={meta.labels} formIDs={meta.ids} removeForm={removeForm} changeFocus={changeFocus} changeValue={changeValue}/>);
+    forms.forEach((object, index) => {
+        formElements.push(<Form key={object.formKey} formKey={object.formKey} formType={formType} formIndex={index} formLabels={meta.labels} formIDs={meta.ids} removeForm={removeForm} changeValue={changeValue}/>);
     });
 
     let addBtn;
@@ -45,7 +44,6 @@ FormSection.propTypes = {
     forms: PropTypes.array.isRequired,
     addForm: PropTypes.func,
     removeForm: PropTypes.func,
-    changeFocus: PropTypes.func.isRequired,
     changeValue: PropTypes.func.isRequired,
 }
 

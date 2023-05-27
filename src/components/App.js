@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import uniqid from 'uniqid';
 import FormSection from './FormSection';
 import DisplaySection from './DisplaySection';
@@ -7,8 +7,6 @@ const App = () => {
     const [pForms, setPForms] = useState([]);
     const [wForms, setWForms] = useState([]);
     const [eForms, setEForms] = useState([]);
-    const [targetFormIndex, setTForm] = useState(null);
-    const [targetFieldIndex, setTField] = useState(null);
 
     const meta = {
         p: {
@@ -30,11 +28,9 @@ const App = () => {
 
     // componentDidMount
     useEffect(() => {addForm()}, []);
+    useEffect(() => {console.log('state change')}, [pForms]);
 
     function addForm(e) {
-        // console.log('ADD FORM');
-        // console.log(e);
-
         let formType;
         if (e !== undefined) {
             formType = e.target.dataset.formType
@@ -45,8 +41,7 @@ const App = () => {
         let formKey = uniqid();
         let fields = [];
         for (let i = 0; i < formMeta.ids.length; i++) {
-            let itemKey = `${formKey}-${i}`;
-            fields.push({itemKey: itemKey, itemID: formMeta.ids[i], itemValue: ''});
+            fields.push({itemID: formMeta.ids[i], itemValue: ''});
         }
 
         if (formType === 'p') {
@@ -66,23 +61,13 @@ const App = () => {
         }
     }
 
-    // !! only updates value when TForm/TField is updated in state
-    function changeFocus(e) {
-        console.log('change focus');
-        let formType = e.target.dataset.formType;
-        if (formType === 'p') {
-            setTForm(pForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
-        } else if (formType === 'w') {
-            setTForm(wForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
-        } else if (formType === 'e') {
-            setTForm(eForms.findIndex(object => object.formKey === e.target.dataset.inputKey.split('-')[0]));
-        }
-        setTField(parseInt(e.target.dataset.inputKey.split('-')[1]));
-    }
     function changeValue(e) {
         // console.log('value change');
-        // console.log(targetFormIndex, targetFieldIndex);
+        // console.log(e.target.dataset);
+
         let formType = e.target.dataset.formType;
+        let formIndex = e.target.dataset.formIndex;
+        let fieldIndex = e.target.dataset.fieldIndex;
         let formsCopy;
         if (formType === 'p') {
             formsCopy = pForms;
@@ -91,23 +76,23 @@ const App = () => {
         } else if (formType === 'e') {
             formsCopy = eForms;
         }
-        formsCopy[targetFormIndex].fields[targetFieldIndex].itemValue = e.target.value;
-        // console.log(formsCopy[targetFormIndex].fields[targetFieldIndex].itemValue)
+        formsCopy[formIndex].fields[fieldIndex].itemValue = e.target.value;
+        // console.log(formsCopy[formIndex].fields[fieldIndex].itemValue)
         if (formType === 'p') {
-            setPForms(formsCopy);
+            setPForms([...formsCopy]);
         } else if (formType === 'w') {
-            setWForms(formsCopy);
+            setWForms([...formsCopy]);
         } else if (formType === 'e') {
-            setEForms(formsCopy);
+            setEForms([...formsCopy]);
         }
     }
 
     return (
         <>
             <section id='interact'>
-                <FormSection formType='p' meta={meta.p} forms={pForms} changeFocus={changeFocus} changeValue={changeValue}/>
-                <FormSection formType='w' meta={meta.w} forms={wForms} addForm={addForm} removeForm={removeForm} changeFocus={changeFocus} changeValue={changeValue}/>
-                <FormSection formType='e' meta={meta.e} forms={eForms} addForm={addForm} removeForm={removeForm} changeFocus={changeFocus} changeValue={changeValue}/>
+                <FormSection formType='p' meta={meta.p} forms={pForms}  changeValue={changeValue}/>
+                <FormSection formType='w' meta={meta.w} forms={wForms} addForm={addForm} removeForm={removeForm}  changeValue={changeValue}/>
+                <FormSection formType='e' meta={meta.e} forms={eForms} addForm={addForm} removeForm={removeForm} changeValue={changeValue}/>
             </section>
             <section id='display'>
                 <DisplaySection sectionType='p' displayContent={pForms}/>

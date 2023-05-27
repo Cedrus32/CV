@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Field = (props) => {
-    let {itemKey, formType, itemID, itemLabel, changeFocus, changeValue} = props;
+    let {itemKey, formType, formIndex, fieldIndex, itemID, itemLabel, changeValue} = props;
+
+    // console.log(formType, formIndex, itemIndex);
 
     let element;
     let inputType = getType(itemID)
     if (inputType === 'textarea') {
-        element = <textarea key={itemKey} data-input-key={itemKey} data-form-type={formType} id={itemID} onFocus={changeFocus} onChange={changeValue}></textarea>
+        element = <textarea key={itemKey} data-form-type={formType} data-form-index={formIndex} data-field-index={fieldIndex} id={itemID} onChange={changeValue}></textarea>
     } else {
-        element = <input key={itemKey} data-input-key={itemKey} data-form-type={formType} type={inputType} id={itemID} onFocus={changeFocus} onChange={changeValue}></input>
+        element = <input key={itemKey} data-input-key={itemKey} data-form-type={formType} data-form-index={formIndex} data-field-index={fieldIndex} type={inputType} id={itemID} onChange={changeValue}></input>
+
+
     }
 
     function getType(id) {
@@ -38,9 +42,10 @@ const Field = (props) => {
 Field.propTypes = {
     itemKey: PropTypes.string.isRequired,
     formType: PropTypes.string.isRequired,
+    formIndex: PropTypes.number.isRequired,
+    fieldIndex: PropTypes.number.isRequired,
     itemID: PropTypes.string.isRequired,
     itemLabel: PropTypes.string.isRequired,
-    changeFocus: PropTypes.func.isRequired,
     changeValue: PropTypes.func.isRequired,
 }
 

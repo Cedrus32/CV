@@ -6,18 +6,18 @@ import Button from './Button';
 const Form = (props) => {
     let formKey = props.formKey;
     let formType = props.formType;
+    let formIndex = props.formIndex;
     let formLabels = props.formLabels;
     let formIDs = props.formIDs;
     let removeForm = props.removeForm;
-    let changeFocus = props.changeFocus;
     let changeValue = props.changeValue;
- 
+
     let inputElements = [];
     for (let i = 0; i < formIDs.length; i++) {
         let objectKey = `${formKey}-${i}`;
         let objectLabel = formLabels[i];
         let objectID = formIDs[i];
-        inputElements.push(<Field key={objectKey} itemKey={objectKey} formType={formType} itemID={objectID} itemLabel={objectLabel} changeFocus={changeFocus} changeValue={changeValue}/>);
+        inputElements.push(<Field key={objectKey} itemKey={objectKey} formType={formType} formIndex={formIndex} fieldIndex={i} itemID={objectID} itemLabel={objectLabel} changeValue={changeValue}/>);
     }
 
     let removeBtn;
@@ -35,10 +35,10 @@ const Form = (props) => {
 Form.propTypes = {
     formKey: PropTypes.string.isRequired,
     formType: PropTypes.string.isRequired,
+    formIndex: PropTypes.number.isRequired,
     formLabels: PropTypes.array.isRequired,
     formIDs: PropTypes.array.isRequired,
     removeForm: PropTypes.func,
-    changeFocus: PropTypes.func.isRequired,
     changeValue: PropTypes.func.isRequired,
 }
 
